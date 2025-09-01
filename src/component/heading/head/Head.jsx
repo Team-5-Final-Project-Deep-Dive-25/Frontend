@@ -9,9 +9,12 @@ import {Swiper , SwiperSlide} from 'swiper/react'
 import "swiper/css";
 import "swiper/css/effect-creative";
 import { EffectCreative ,Autoplay} from "swiper/modules";
+import {useNavigate}from 'react-router-dom'
 
 
 const Head = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="Head">
       <Swiper
@@ -44,7 +47,10 @@ const Head = () => {
               </div>
               <h1>Up to 10% off Voucher</h1>
               <div className="action">
-                <button className="btn btn-link gap-2">
+                <button
+                  className="btn btn-link gap-2"
+                  onClick={() => navigate("products")}
+                >
                   Shop Now
                   <IoMdArrowRoundForward size={24} />
                 </button>
@@ -66,7 +72,10 @@ const Head = () => {
               <h1>Enhance Your Music Experience</h1>
 
               <div className="action">
-                <button className="btn btn-link">
+                <button
+                  className="btn btn-link"
+                  onClick={() => navigate("products")}
+                >
                   Buy Now
                   <IoMdArrowRoundForward
                     size={20}

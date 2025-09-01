@@ -28,6 +28,78 @@ main {
     font-family: var(--font-text);
     color: var(--main-color);
     overflow: hidden;
-    padding: 0 5px;
 
+
+}
+
+del {
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.section-heading {
+    width: 100%;
+
+}
+
+.section-heading>div:nth-of-type(1) {
+    position: relative;
+}
+
+.section-heading>div:nth-of-type(1) p {
+    font-family: var(--font-bold);
+    color: var(--btn-color);
+
+
+
+}
+
+.section-heading>div:nth-of-type(1)::before {
+    content: '';
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 33px;
+    position: absolute;
+    background-color: var(--btn-color);
+    transform: translate(-30px, -5px);
+    border-radius: 3px;
+
+
+
+}
+
+.section-heading>div:nth-of-type(2) {
+    width: 100%;
+    display: flex;
+    transform: translateX(-30px);
+    align-items: center;
+    gap: 20px;
+
+}
+
+.section-heading>div:nth-of-type(2) h2 {
+    font-family: var(--font-bold);
+}
+
+.section-heading>div:nth-of-type(2) div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.section-heading>div:nth-of-type(2) .time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.section-heading>div:nth-of-type(2) .time b {
+    font-family: var(--font-bold);
+    font-size: 25px;
+    transform: translateY(-20px);
 }
