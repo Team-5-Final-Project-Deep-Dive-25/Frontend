@@ -1,0 +1,200 @@
+.Head {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    background-color: #fff;
+}
+
+.Head .container {
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.slide {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--main-color);
+    color: var(--body-bg);
+    border-radius: 10px;
+    padding: 40px;
+    gap: 30px;
+    height: 350px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.headingDeatiles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    width: 50%;
+    min-width: 300px;
+    height: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.headingDeatiles>div:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.headingDeatiles>div:first-of-type span {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.headingDeatiles>div:first-of-type img,
+.headingDeatiles>div:first-of-type .Lu {
+    width: 40px;
+    height: 49px;
+}
+
+.headingDeatiles h1 {
+    font-family: var(--font-bold);
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: 1px;
+}
+
+.headingDeatiles .action {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s ease;
+}
+
+.headingDeatiles .action:hover {
+    transform: scale(1.05);
+}
+
+.headingDeatiles .action button {
+    color: var(--body-bg);
+    background-color: transparent;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: background 0.4s, color 0.4s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.headingDeatiles .action button:hover {
+    background-color: var(--body-bg);
+    color: var(--main-color);
+}
+
+.heading-img {
+    width: 50%;
+    height: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heading-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ========== Tablet (≤992px) ========== */
+@media (max-width: 992px) {
+
+
+    .Head {
+        height: 500px;
+        width: 90%;
+        padding: 10px 0 0 0;
+    }
+
+    .slide {
+        flex-direction: column;
+        height: 500px;
+        padding: 15px 0 0 0;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .headingDeatiles {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .headingDeatiles>div:first-of-type {
+        justify-content: center;
+    }
+
+    .headingDeatiles h1 {
+        font-size: 28px;
+    }
+
+    .headingDeatiles .action {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .headingDeatiles .action button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .heading-img {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .heading-img img {
+        max-height: 300px;
+        object-fit: contain;
+    }
+}
+
+/* ========== Mobile (≤576px) ========== */
+@media (max-width: 576px) {
+    .Head {
+        padding: 20px 0 0;
+        height: 500px;
+        width: 470px;
+    }
+
+    .slide {
+        height: 500px;
+        padding: 15px 0 0 0;
+        gap: 20px;
+
+    }
+
+    .headingDeatiles {
+        gap: 15px;
+    }
+
+    .headingDeatiles h1 {
+        font-size: 23px;
+    }
+
+    .headingDeatiles>div:first-of-type span {
+        font-size: 16px;
+    }
+
+    .heading-img img {
+        max-height: 250px;
+    }
+
+    .headingDeatiles .action button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
