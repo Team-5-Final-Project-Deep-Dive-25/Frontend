@@ -1,0 +1,17 @@
+.Heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 10px 30px 0 0 ;
+}
+
+/* ========== Responsive for mobile ========== */
+@media (max-width: 576px) {
+    .Heading {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+}

@@ -1,9 +1,7 @@
 .Navbar {
     width: 100%;
-    max-height: 90px;
     padding: 15px 25px 10px;
     border-bottom: 1px solid rgba(32, 32, 32, 0.123);
-
 }
 
 nav {
@@ -13,25 +11,25 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-
+    flex-wrap: wrap;
 }
+
 nav * {
     cursor: pointer;
 }
 
-nav .Logo img {
+nav .logo img {
     width: 118px;
     height: 24px;
-    opacity: 1;
 }
+
+
 
 nav ul {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 35px;
-
 }
 
 nav ul li {
@@ -41,25 +39,24 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: var(--main-color);
-    background-color: var(--body-bg);
     font-size: 15px;
+    background-color: var(--body-bg);
 }
 
-nav .search-cart-wishlist {
+.search-cart-wishlist {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 25px;
-
 }
 
-nav .search-cart-wishlist .search {
+.search-cart-wishlist .search {
     position: relative;
     width: 243px;
     height: 38px;
 }
 
-nav .search-cart-wishlist .search input {
+.search-cart-wishlist .search input {
     width: 100%;
     height: 100%;
     padding: 0 30px 0 10px;
@@ -70,7 +67,7 @@ nav .search-cart-wishlist .search input {
     color: var(--main-color);
 }
 
-nav .search-cart-wishlist .search .search-icon {
+.search-cart-wishlist .search-icon {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -78,21 +75,73 @@ nav .search-cart-wishlist .search .search-icon {
     font-size: 14px;
     color: var(--main-color);
     pointer-events: none;
-   
 }
 
-
-nav .search-cart-wishlist .icons-page {
+.icons-page {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 15px;
     font-size: 18px;
-   
 }
 
-nav .search-cart-wishlist a{
+.search-cart-wishlist a {
     text-decoration: none;
     color: var(--main-color) !important;
 }
 
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: var(--main-color);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    nav .logo {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* gap: 15px; */
+        }
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .search-cart-wishlist {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        margin-top: 10px;
+        gap: 15px;
+    }
+
+    .search-cart-wishlist .search {
+        width: 100%;
+    }
+
+    .icons-page {
+        justify-content: space-around;
+        width: 100%;
+    }
+}

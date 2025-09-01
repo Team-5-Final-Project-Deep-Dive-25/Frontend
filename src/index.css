@@ -27,5 +27,7 @@
 main {
     font-family: var(--font-text);
     color: var(--main-color);
+    overflow: hidden;
+    padding: 0 5px;
 
 }

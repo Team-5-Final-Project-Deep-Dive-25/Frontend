@@ -49,3 +49,41 @@
     margin: 0;
     font-size: 14px;
 }
+
+ 
+
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .Info .container div {
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    
+        .Info .container div p {
+            margin: 0;
+            font-size: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+  
+}
+
+@media (max-width: 576px) {
+    .Info .container div {
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    
+        .Info .container div p {
+            margin: 0;
+            font-size: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+}
