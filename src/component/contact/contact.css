@@ -1,6 +1,14 @@
+:root {
+    --product-bg: #f7f7f7;
+    --body-bg: #fff;
+    --btn-color: #ff4d4f;
+    --main-color: #333;
+    --font-bold: 'Arial Black', sans-serif;
+    --font-text: Arial, sans-serif;
+}
+
 .contact-container {
     display: flex;
-    /* flex-wrap: wrap; */
     width: 100%;
     min-height: 100vh;
     gap: 20px;
@@ -9,7 +17,7 @@
 }
 
 .left {
-    flex: 1 1 30%;
+    flex: 0 0 300px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -62,20 +70,20 @@
 }
 
 .right {
-    flex: 1 1 70%;
+    flex: 3;
     display: flex;
     flex-direction: column;
 }
 
 .form-card {
     width: 100%;
-    background: var(--body-bg);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    font-family: var(--font-text);
+    flex-grow: 1;
+    background: var(--body-bg);
+    /* padding: 5rem; */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .form-card h2 {
@@ -88,16 +96,16 @@
 .field1 {
     display: flex;
     gap: 1rem;
-    margin-bottom: 12px;
     flex-wrap: wrap;
+    /* margin-bottom: 12px; */
 }
 
 .field1 input {
-    flex: 1 1 calc(33.333% - 0.66rem);
-    /* ثلاثة Inputs بجانب بعض */
-    min-width: 200px;
+    flex: 1 1 calc((100% / 3) - 0.66rem);
+    min-width: 0;
     padding: 14px;
     font-size: 15px;
+    box-sizing: border-box;
 }
 
 .form-card input,
@@ -106,7 +114,7 @@
     padding: 14px;
     font-size: 15px;
     box-sizing: border-box;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
 }
 
 .form-card textarea {
@@ -152,7 +160,7 @@
 
 @media (max-width: 1024px) {
     .left {
-        flex: 1 1 40%;
+        flex: 0 0 40%;
     }
 
     .right {
