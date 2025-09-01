@@ -1,0 +1,183 @@
+.contact-container {
+    display: flex;
+    /* flex-wrap: wrap; */
+    width: 100%;
+    min-height: 100vh;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.left {
+    flex: 1 1 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: var(--product-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    gap: 15px;
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background-color: var(--btn-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-circle i {
+    color: #fff;
+    font-size: 28px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.card-content h4 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--main-color);
+    font-family: var(--font-bold);
+}
+
+.card-content p {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+    font-family: var(--font-text);
+}
+
+.right {
+    flex: 1 1 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-card {
+    width: 100%;
+    background: var(--body-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-text);
+}
+
+.form-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--main-color);
+    font-family: var(--font-bold);
+}
+
+.field1 {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.field1 input {
+    flex: 1 1 calc(33.333% - 0.66rem);
+    /* ثلاثة Inputs بجانب بعض */
+    min-width: 200px;
+    padding: 14px;
+    font-size: 15px;
+}
+
+.form-card input,
+.form-card textarea {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+.form-card textarea {
+    resize: vertical;
+    min-height: 200px;
+}
+
+.form-card button {
+    width: 100%;
+    padding: 12px;
+    background: var(--btn-color);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.form-card button:hover {
+    background: #a62f2f;
+}
+
+.form-card button:disabled {
+    background: #9e9e9e;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #d93025;
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+}
+
+.success {
+    color: #188038;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .left {
+        flex: 1 1 40%;
+    }
+
+    .right {
+        flex: 1 1 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .left,
+    .right {
+        flex: 1 1 100%;
+    }
+
+    .field1 input {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-card {
+        padding: 20px;
+    }
+}
