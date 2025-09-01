@@ -11,11 +11,6 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
 
-  const dummyData = [
-    { icon: "bi-envelope", title: "Send us a detailed message", subtitle: "Our team will respond quickly." },
-    { icon: "bi-telephone", title: "Call our support line", subtitle: "Available 24/7 for all inquiries." },
-  ];
-
   const validate = () => {
     const newErrors = {};
     if (!name) newErrors.name = "Name is required";
@@ -50,38 +45,58 @@ export default function Contact() {
   };
 
   return (
-    <div className="contact-container">
-      <div className="left">
-        {dummyData.map((item, index) => (
-          <div key={index} className="card">
-            <div className="icon-circle"><i className={`bi ${item.icon}`}></i></div>
-            <div className="card-content">
-              <h4>{item.title}</h4>
-              <p>{item.subtitle}</p>
-            </div>
-          </div>
-        ))}
+    <div className="contact-wrapper">
+      {/* Breadcrumb */}
+      <div className="breadcrumb">
+        <span>Home</span> <span className="divider">/</span> <span className="active">Contact</span>
       </div>
 
-      <div className="right">
-        <div className="form-card">
-          <h2>Contact Us</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="field1">
-              <input type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} />
-              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-              <input type="text" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+      {/* Main container */}
+      <div className="contact-container">
+        {/* Left side */}
+        <div className="left">
+          <div className="card">
+            <div className="icon-circle"><i className="bi-telephone"></i></div>
+            <div className="card-content">
+              <h4>Call To Us</h4>
+              <p>We are available 24/7, 7 days a week.</p>
+              <p>Phone: +8801611112222</p>
             </div>
-            {errors.name && <p className="error">{errors.name}</p>}
-            {errors.email && <p className="error">{errors.email}</p>}
-            {errors.phone && <p className="error">{errors.phone}</p>}
+          </div>
 
-            <textarea placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
-            {errors.message && <p className="error">{errors.message}</p>}
+          <div className="card">
+            <div className="icon-circle"><i className="bi-envelope"></i></div>
+            <div className="card-content">
+              <h4>Write To Us</h4>
+              <p>Fill out our form and we will contact you within 24 hours.</p>
+              <p>Email: customer@exclusive.com</p>
+              <p>Support: support@exclusive.com</p>
+            </div>
+          </div>
+        </div>
 
-            <button type="submit" disabled={loading}>{loading ? "Sending..." : "Submit"}</button>
-            {success && <p className="success">{success}</p>}
-          </form>
+        {/* Right side */}
+        <div className="right">
+          <div className="form-card">
+            <form onSubmit={handleSubmit}>
+              <div className="field1">
+                <input type="text" placeholder="Your Name *" value={name} onChange={(e) => setName(e.target.value)} />
+                <input type="email" placeholder="Your Email *" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="text" placeholder="Your Phone *" value={phone} onChange={(e) => setPhone(e.target.value)} />
+              </div>
+              {errors.name && <p className="error">{errors.name}</p>}
+              {errors.email && <p className="error">{errors.email}</p>}
+              {errors.phone && <p className="error">{errors.phone}</p>}
+
+              <textarea placeholder="Your Message *" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
+              {errors.message && <p className="error">{errors.message}</p>}
+
+              <button type="submit" disabled={loading}>
+                {loading ? "Sending..." : "Send Message"}
+              </button>
+              {success && <p className="success">{success}</p>}
+            </form>
+          </div>
         </div>
       </div>
     </div>
