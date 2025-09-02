@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./products.css";
-import Product from "../../common/product/product";
+// import Product from "../../common/product/product";
 import { useLocation } from "react-router-dom";
 import { productsContext } from "../../context/ProductsContext";
 

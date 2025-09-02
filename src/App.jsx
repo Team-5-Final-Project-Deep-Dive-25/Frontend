@@ -10,7 +10,12 @@ import SignUp from "./component/signup/Signup";
 import Wishlist from "./component/wishlist/Wishlist";
 import Login from "./component/login/login";
 import NotFound from "./component/error404/notfound";
+import Checkout from "./component/checkout/checkout";
 import Account from './component/account/account'; 
+import Products from "./component/products/Products";
+import FlashSales from "./component/flashSales/flashSales";
+//import FlashSales from "./component/flashSales/flashSales";
+
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -51,11 +56,25 @@ const App = () => {
           path:"*" ,
           element:<NotFound />
         },
-        {
-          path:"account",
+         {
+           path:"account",
           element:<Account />
+         },
+        { 
+        path:"checkout" ,
+        element:<Checkout />
         },
+        {
+           path:"products" ,
+           element:<Products />
+        },
+        {
+           path:"flash-sales" ,
+         element:<FlashSales />
+        }
         
+      
+
       ],
     },
   ]);
