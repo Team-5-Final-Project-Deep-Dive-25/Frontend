@@ -2,24 +2,20 @@ import React from "react";
 import "./product.css";
 import Process from "./Process";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
-import { Link } from "react-router-dom";
-
 
 const Product = ({ ele }) => {
   return (
     <div className="container-card">
-      <Link to={`/product/${ele.id}`}>
-
-        <div className="container-card-img">
-          <img src={ele?.thumbnail} alt="product" className="product-image" />
-          <Process ele={ele} />
-          <button className="add-to-cart-btn">Add to Cart</button>
-        </div>
-      </Link>
-
+      <div className="container-card-img">
+        <img src={ele?.thumbnail} alt="product" className="product-image" />
+        <Process ele={ele} />
+        <button className="add-to-cart-btn">Add to Cart</button>
+      </div>
 
       <div className="container-card-details">
-        <h2 className="product-title">{ele?.title.split(' ').slice(0, 3).join()}</h2>
+        <h2 className="product-title">
+          {ele?.title.split(" ").slice(0, 3).join(" ")}
+        </h2>
 
         <div className="product-info-row">
           <p className="product-price m-0">

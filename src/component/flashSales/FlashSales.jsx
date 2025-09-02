@@ -1,15 +1,23 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "./flashSales.css";
 import Product from "../../common/product/product";
+import { ProductsContext } from "../../context/ProductsContext";
+import { useNavigate } from "react-router-dom";
 
 const FlashSales = () => {
-  const deadline = new Date("Dec 31, 2026 23:59:59").getTime();
+  const navigate = useNavigate();
+  const deadline = new Date("Oct 25, 2025 23:59:59").getTime();
 
   const refDays = useRef();
   const refHours = useRef();
   const refMinutes = useRef();
   const refSeconds = useRef();
 
+  const { products } = useContext(ProductsContext);
+
+  const filteredProducts = products
+    .filter((product) => product.price < 500)
+    .slice(0, 4)
   useEffect(() => {
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -38,18 +46,16 @@ const FlashSales = () => {
 
     updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
-
     return () => clearInterval(interval);
   }, [deadline]);
 
   return (
-    <div className="FlashSales">
+    <div className="FlashSales mt-5">
       <section className="container mb-5">
-        <div className="section-heading">
+        <div className="section-heading flash-head">
           <div>
             <p>Today’s</p>
           </div>
-
           <div>
             <h2>Flash Sales</h2>
             <div className="countdown flex align-center gap-2">
@@ -75,9 +81,20 @@ const FlashSales = () => {
             </div>
           </div>
         </div>
-      </section>
 
-     
+        <div className="product-sales w-100">
+          {filteredProducts.map((ele) => (
+            <div key={ele.id} className="cont-sale">
+              <Product ele={ele} />
+              <span className="sale">{ele.discountPercentage}%</span>
+            </div>
+          ))}
+        </div>
+
+        <button className="btn-sale" onClick={() => navigate("/Products")}>
+          View All Products
+        </button>
+      </section>
     </div>
   );
 };

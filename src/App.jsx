@@ -9,6 +9,10 @@ import Contact from "./component/contact/Contact";
 import SignUp from "./component/signup/Signup";
 import Wishlist from "./component/wishlist/Wishlist";
 import Login from "./component/login/login";
+import ProductsOfCat  from'./component/productsOfCategory/ProductsOfCat'
+
+import Products from "./component/products/Products";
+
 import NotFound from "./component/error404/notfound";
 import Account from './component/account/account'; 
 const App = () => {
@@ -48,8 +52,12 @@ const App = () => {
           element: <Login />,
         },
         {
-          path:"*" ,
-          element:<NotFound />
+          path: "/products",
+          element: <Products />,
+        },
+        {
+          path: "/ProductsOfCat",
+          element: <ProductsOfCat />,
         },
         {
           path:"account",

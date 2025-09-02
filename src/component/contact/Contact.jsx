@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./contact.css";
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export default function Contact() {
   const [name, setName] = useState("");

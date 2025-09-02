@@ -23,12 +23,12 @@ nav .logo img {
     height: 24px;
 }
 
-ul li a.active{
+ul li a.active,
+.act-icons.active * {
     color: var(--btn-color);
     font-family: var(--font-bold);
     text-decoration: underline;
-    transition: .3s;
-
+    transition: 0.3s;
 }
 
 

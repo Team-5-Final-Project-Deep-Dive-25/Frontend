@@ -46,13 +46,28 @@ const Navbar = () => {
           </div>
 
           <div className="icons-page">
-            <NavLink to="/cart">
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                isActive ? "act-icons active" : "act-icons"
+              }
+            >
               <FaCartShopping />
             </NavLink>
-            <NavLink to="/wishlist">
+            <NavLink
+              to="/wishlist"
+              className={({ isActive }) =>
+                isActive ? "act-icons active" : "act-icons"
+              }
+            >
               <MdFavoriteBorder />
             </NavLink>
-            <NavLink to="/login">
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive ? "act-icons active" : "act-icons"
+              }
+            >
               <FaUserAlt />
             </NavLink>
           </div>
