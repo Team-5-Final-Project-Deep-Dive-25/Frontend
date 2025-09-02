@@ -9,6 +9,7 @@ import Contact from "./component/contact/Contact";
 import SignUp from "./component/signup/Signup";
 import Wishlist from "./component/wishlist/Wishlist";
 import Login from "./component/login/login";
+import ProductsOfCat  from'./component/productsOfCategory/ProductsOfCat'
 
 import Products from "./component/products/Products";
 
@@ -51,6 +52,10 @@ const App = () => {
         {
           path: "products",
           element: <Products />,
+        },
+        {
+          path: "/ProductsOfCat",
+          element: <ProductsOfCat />,
         },
         {
           path: "*",

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import "./flashSales.css";
 import Product from "../../common/product/product";
-import { productsContext } from "../../context/ProductsContext";
+import { ProductsContext } from "../../context/ProductsContext";
 import { useNavigate } from "react-router-dom";
 
 const FlashSales = () => {
@@ -13,12 +13,11 @@ const FlashSales = () => {
   const refMinutes = useRef();
   const refSeconds = useRef();
 
-  const { products } = useContext(productsContext);
+  const { products } = useContext(ProductsContext);
 
   const filteredProducts = products
     .filter((product) => product.price < 500)
-    .slice(0, 4);
-
+    .slice(0, 4)
   useEffect(() => {
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -51,9 +50,9 @@ const FlashSales = () => {
   }, [deadline]);
 
   return (
-    <div className="FlashSales">
+    <div className="FlashSales mt-5">
       <section className="container mb-5">
-        <div className="section-heading">
+        <div className="section-heading flash-head">
           <div>
             <p>Today’s</p>
           </div>

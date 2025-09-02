@@ -1,20 +1,21 @@
 import React, { useContext } from "react";
 import "./products.css";
 import Product from "../../common/product/product";
-import { useLocation } from "react-router-dom";
-import { productsContext } from "../../context/ProductsContext";
+import { useLocation ,Link} from "react-router-dom";
+import { ProductsContext } from "../../context/ProductsContext";
 
 const Products = () => {
   const location = useLocation();
-  const { products, handelSortingData, sort } = useContext(productsContext);
+  const { products, handelSortingData, sort } = useContext(ProductsContext);
 
   return (
     <div className="Products">
-      <div className="pageHeading p-5">
-        <span>Home</span>/
-        <span className="active">{location.pathname.slice(1)}</span>
+      <div className="pageHeading p-5 d-flex">
+        <Link to="/" className="nav-link">
+          Home
+        </Link>
+        /<span className="active">{location.pathname.slice(1)}</span>
       </div>
-
       <div className="container">
         <div className="sort-products">
           <span>Sort by : </span>
@@ -27,9 +28,12 @@ const Products = () => {
           </select>
         </div>
       </div>
+
       <div className="container-all-products p-3">
         {products.map((ele, index) => (
-          <Product key={index} ele={ele} />
+          <div key={index} className="product-wrapper">
+            <Product ele={ele} />
+          </div>
         ))}
       </div>
     </div>
