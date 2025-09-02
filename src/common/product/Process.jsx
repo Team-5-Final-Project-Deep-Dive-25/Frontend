@@ -1,18 +1,18 @@
 import React from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { BiShowAlt } from "react-icons/bi";
-import { FaCartPlus } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
-function Process() {
+function Process({ ele }) {
   return (
     <div className="product-icons">
       <button>
         <FaRegHeart />
       </button>
 
-      <button>
+      <Link to={`/products/${ele.id}`}>
         <BiShowAlt />
-      </button>
+      </Link>
     </div>
   );
 }

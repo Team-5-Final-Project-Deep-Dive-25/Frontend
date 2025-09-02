@@ -13,6 +13,8 @@ import Login from "./component/login/login";
 import Products from "./component/products/Products";
 
 import NotFound from "./component/error404/notfound";
+import ProductDetails from "./component/ProductDetails/ProductDetails";
+
 
 const App = () => {
   const router = createBrowserRouter([
@@ -56,6 +58,11 @@ const App = () => {
           path: "*",
           element: <NotFound />,
         },
+        {
+          path: "products/:id",
+          element: <ProductDetails />
+        },
+
       ],
     },
   ]);
