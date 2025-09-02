@@ -10,6 +10,7 @@ import SignUp from "./component/signup/Signup";
 import Wishlist from "./component/wishlist/Wishlist";
 import Login from "./component/login/login";
 import NotFound from "./component/error404/notfound";
+import Account from './component/account/account'; 
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -49,7 +50,12 @@ const App = () => {
         {
           path:"*" ,
           element:<NotFound />
-        }
+        },
+        {
+          path:"account",
+          element:<Account />
+        },
+        
       ],
     },
   ]);
