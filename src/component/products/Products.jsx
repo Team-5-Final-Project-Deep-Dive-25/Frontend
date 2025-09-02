@@ -4,7 +4,6 @@ import Product from "../../common/product/product";
 import { useLocation } from "react-router-dom";
 import { productsContext } from "../../context/ProductsContext";
 
-
 const Products = () => {
   const location = useLocation();
   const { products, handelSortingData, sort } = useContext(productsContext);
