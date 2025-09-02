@@ -9,13 +9,8 @@ import Contact from "./component/contact/Contact";
 import SignUp from "./component/signup/Signup";
 import Wishlist from "./component/wishlist/Wishlist";
 import Login from "./component/login/login";
-
-import Products from "./component/products/Products";
-
 import NotFound from "./component/error404/notfound";
-import ProductDetails from "./component/ProductDetails/ProductDetails";
-
-
+import Account from './component/account/account'; 
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -30,6 +25,7 @@ const App = () => {
           path: "cart",
           element: <Cart />,
         },
+
         {
           path: "about",
           element: <About />,
@@ -42,6 +38,7 @@ const App = () => {
           path: "wishlist",
           element: <Wishlist />,
         },
+
         {
           path: "signup",
           element: <SignUp />,
@@ -51,18 +48,14 @@ const App = () => {
           element: <Login />,
         },
         {
-          path: "products",
-          element: <Products />,
+          path:"*" ,
+          element:<NotFound />
         },
         {
-          path: "*",
-          element: <NotFound />,
+          path:"account",
+          element:<Account />
         },
-        {
-          path: "products/:id",
-          element: <ProductDetails />
-        },
-
+        
       ],
     },
   ]);
