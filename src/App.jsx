@@ -14,7 +14,7 @@ import ProductsOfCat  from'./component/productsOfCategory/ProductsOfCat'
 import Products from "./component/products/Products";
 
 import NotFound from "./component/error404/notfound";
-
+import Account from './component/account/account'; 
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -29,6 +29,7 @@ const App = () => {
           path: "cart",
           element: <Cart />,
         },
+
         {
           path: "about",
           element: <About />,
@@ -41,6 +42,7 @@ const App = () => {
           path: "wishlist",
           element: <Wishlist />,
         },
+
         {
           path: "signup",
           element: <SignUp />,
@@ -50,7 +52,7 @@ const App = () => {
           element: <Login />,
         },
         {
-          path: "products",
+          path: "/products",
           element: <Products />,
         },
         {
@@ -58,9 +60,10 @@ const App = () => {
           element: <ProductsOfCat />,
         },
         {
-          path: "*",
-          element: <NotFound />,
+          path:"account",
+          element:<Account />
         },
+        
       ],
     },
   ]);

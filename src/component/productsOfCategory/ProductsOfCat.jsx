@@ -16,17 +16,17 @@ const ProductsOfCat = () => {
 
   return (
     <div className="ProductsOfCat">
-       <div className="pageHeading p-5">
+      <div className="pageHeading p-5">
         <span>Home</span>/
         <span className="active">{location.pathname.slice(1)}</span>
       </div>
 
-      <div className="container m-5">
-        <div className="container-all-products p-3 d-flex">
-          {productsData.map((ele, index) => (
-            <Product key={index} ele={ele} />
-          ))}
-        </div>
+      <div className="container-all-products p-3 d-flex">
+        {productsData.map((ele, index) => (
+          <div className="product-wrapper" key={index}>
+            <Product ele={ele} />
+          </div>
+        ))}
       </div>
     </div>
   );
