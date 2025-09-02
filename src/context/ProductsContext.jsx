@@ -6,9 +6,15 @@ export const productsContext =createContext();
 export const ProductsContextProvider = ({children}) => {
 
     const [products , setprducts]=useState([]);
+    const [PrductsOfCategory, setPrductsOfCategory] = useState([]);
+    const [categoryName, setCategoryName] = useState([]);
+    
    
     const [sort, setSort] = useState("Default");
     let url = 'https://dummyjson.com/products'
+    let urlCat = "https://dummyjson.com/products/categories";
+    
+
 
     const getAllProducts= async()=>{
         let {data}= await axios.get(url)
@@ -16,8 +22,22 @@ export const ProductsContextProvider = ({children}) => {
 
     }
 
+    const getCategoriesName= async()=>{
+      let {data} =await axios.get(urlCat);
+     setCategoryName(data);
+
+    }
+
+    const getProductsOfCategory= async(url)=>{
+      let { data } = await axios.get(url);
+      setPrductsOfCategory(data.products);
+
+    }
+
     useEffect(()=>{
         getAllProducts();
+        getCategoriesName();
+        getProductsOfCategory();
     },[])
 
     const handelSortingData = (e) => {
@@ -61,7 +81,18 @@ export const ProductsContextProvider = ({children}) => {
 
 
   return (
-    <productsContext.Provider value={{ products, handelSortingData ,sort }}>
+    <productsContext.Provider
+      value={{
+        products,
+        handelSortingData,
+        sort,
+        getCategoriesName,
+        PrductsOfCategory,
+        categoryName,
+        getProductsOfCategory
+      }}
+
+    >
       {children}
     </productsContext.Provider>
   );

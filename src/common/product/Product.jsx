@@ -13,7 +13,9 @@ const Product = ({ ele }) => {
       </div>
 
       <div className="container-card-details">
-        <h2 className="product-title">{ele?.title.split(' ').slice(0,3).join()}</h2>
+        <h2 className="product-title">
+          {ele?.title.split(" ").slice(0, 3).join(" ")}
+        </h2>
 
         <div className="product-info-row">
           <p className="product-price m-0">
