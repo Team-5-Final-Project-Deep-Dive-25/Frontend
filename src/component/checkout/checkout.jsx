@@ -85,7 +85,7 @@ export default function Checkout() {
       onChange={(e) => setPayment(e.target.value)}
     />
     Bank
-    {/* <span className="checkmark">✔</span> */}
+    { <span className="checkmark">✔</span> }
   </label>
 
   <label className={payment === "cash" ? "active" : ""}>
@@ -97,7 +97,7 @@ export default function Checkout() {
       onChange={(e) => setPayment(e.target.value)}
     />
     Cash on delivery
-    {/* <span className="checkmark">✔</span> */}
+    { <span className="checkmark">✔</span> }
   </label>
 </div>
 

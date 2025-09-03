@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./contact.css";
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -46,11 +46,14 @@ export default function Contact() {
 
   return (
     <div className="contact-wrapper">
+      {/* Breadcrumb */}
       <div className="breadcrumb">
         <span>Home</span> <span className="divider">/</span> <span className="active">Contact</span>
       </div>
 
+      {/* Main container */}
       <div className="contact-container">
+        {/* Left side */}
         <div className="left">
           <div className="card">
             <div className="icon-circle"><i className="bi-telephone"></i></div>
@@ -72,6 +75,7 @@ export default function Contact() {
           </div>
         </div>
 
+        {/* Right side */}
         <div className="right">
           <div className="form-card">
             <form onSubmit={handleSubmit}>

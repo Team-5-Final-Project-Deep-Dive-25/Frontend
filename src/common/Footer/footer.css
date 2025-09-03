@@ -1,6 +1,5 @@
 footer {
     background-color: #000000 !important;
-    /* خلفية سوداء داكنة */
     color: var(--body-color) !important;
     border-top: 2px solid var(--main-color) !important;
     padding-top: 2rem;
@@ -12,17 +11,17 @@ footer h5 {
     letter-spacing: 1.2px !important;
     color: var(--body-color);
     font-size: 1.1rem;
-    /* حجم أقل شوي للعناوين */
+  
     margin-bottom: 1.2rem;
 }
 
 footer p,
 footer ul li {
     font-size: 0.7rem !important;
-    /* صغر الخطوط */
+  
     opacity: 0.6 !important;
     margin-bottom: 1rem;
-    /* زيادة التباعد بين الأسطر */
+   
 }
 
 footer ul {
@@ -43,7 +42,7 @@ footer .icon:hover {
     color: var(--main-color) !important;
 }
 
-/* زيادة المسافات بين الأعمدة */
+
 .row.gy-4>div {
     margin-bottom: 2.2rem;
 }

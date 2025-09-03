@@ -238,7 +238,7 @@
   display: none; 
 }
 
-/* 
+
 .payment label .checkmark {
   position: absolute;
   top: 8px;
@@ -246,7 +246,7 @@
   font-size: 16px;
   color: red;
   display: none;
-} */
+} 
 
 
 .payment label.active {
@@ -256,9 +256,9 @@
   font-weight: 600;
 }
 
-/* .payment label.active .checkmark {
+ .payment label.active .checkmark {
   display: block;
-} */
+} 
 
 
 .payment label:hover {

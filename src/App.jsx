@@ -9,12 +9,20 @@ import Contact from "./component/contact/Contact";
 import SignUp from "./component/signup/Signup";
 import Wishlist from "./component/wishlist/Wishlist";
 import Login from "./component/login/login";
+import ProductsOfCat from './component/productsOfCategory/ProductsOfCat'
+
+// import Products from "./component/products/Products";
+
 import NotFound from "./component/error404/notfound";
+
 import Checkout from "./component/checkout/checkout";
 import Account from './component/account/account'; 
 import Products from "./component/products/Products";
-import FlashSales from "./component/flashSales/flashSales";
+import FlashSales from "./component/flashSales/FlashSales";
 //import FlashSales from "./component/flashSales/flashSales";
+
+// import Account from './component/account/account';
+import ProductDetails from "./component/ProductDetails/ProductDetails";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -53,9 +61,10 @@ const App = () => {
           element: <Login />,
         },
         {
-          path:"*" ,
-          element:<NotFound />
+          path: "/products",
+          element: <Products />,
         },
+
          {
            path:"account",
           element:<Account />
@@ -71,9 +80,26 @@ const App = () => {
         {
            path:"flash-sales" ,
          element:<FlashSales />
-        }
+        },
         
       
+
+        {
+          path: "/ProductsOfCat",
+          element: <ProductsOfCat />,
+        },
+        {
+          path: "account",
+          element: <Account />
+        },
+        {
+          path: "product/:id",
+          element: <ProductDetails />,
+        },
+        {
+          path:"*",
+          element:<NotFound/>
+        }
 
       ],
     },

@@ -1,68 +1,98 @@
-import {  createContext, useEffect, useState } from "react";
-import axios from 'axios'
+import { createContext, useEffect, useState } from "react";
+import axios from "axios";
 
-export const productsContext =createContext();
+export const ProductsContext = createContext();
 
-export const ProductsContextProvider = ({children}) => {
+export const ProductsContextProvider = ({ children }) => {
+  const [products, setProducts] = useState([]);
+  const [productsOfCategory, setProductsOfCategory] = useState([]);
+  const [categoryName, setCategoryName] = useState([]);
+  const [sort, setSort] = useState("Default");
 
-    const [products , setprducts]=useState([]);
-   
-    const [sort, setSort] = useState("Default");
-    let url = 'https://dummyjson.com/products'
-
-    const getAllProducts= async()=>{
-        let {data}= await axios.get(url)
-       setprducts(data.products);
-
-    }
-
-    useEffect(()=>{
-        getAllProducts();
-    },[])
-
-    const handelSortingData = (e) => {
-          let value= e.target.value;
-          
-          switch (value) {
-            case "Name(A-Z)":
-              products.sort((pro) => (pro.title > pro.title ? 1 : -1));
-               setSort("Name(A-Z)");
-              setprducts([...products]);
-             
-              break;
-            case "Name(Z-A)":
-              products.sort((pro) => (pro.title < pro.title ? 1 : -1));
-              setSort("Name(Z-A)");
-              setprducts([...products]);
-              
-              break;
-            case "Price(high:low)":
-              products.sort((a, b) => b.price - a.price);
-              setSort("Price(high:low)");
-              setprducts([...products]);
-              
-              break;
-            case "Price(low:high)":
-              products.sort((a, b) => a.price - b.price);
-               setSort("Price(low:high)");
-              setprducts([...products]);
-             
-              break;
-
-            default:
-              getAllProducts();
-               setSort("Default");
-          }
-        };
+  const productsURL = "https://dummyjson.com/products";
+  const categoriesURL = "https://dummyjson.com/products/categories";
 
  
+  const getAllProducts = async () => {
+    try {
+      const { data } = await axios.get(productsURL);
+      setProducts(data.products);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
 
+  const getCategoriesName = async () => {
+    try {
+      const { data } = await axios.get(categoriesURL);
+      setCategoryName(data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
+  const getProductsOfCategory = async (url) => {
+    try {
+      const { data } = await axios.get(url);
+      setProductsOfCategory(data.products);
+    } catch (error) {
+      console.error("Error fetching category products:", error);
+    }
+  };
+
+
+  const handleSortingData = (e) => {
+    const value = e.target.value;
+    const sortedProducts = [...products];
+
+    switch (value) {
+      case "Name(A-Z)":
+        sortedProducts.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+
+      case "Name(Z-A)":
+        sortedProducts.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+
+      case "Price(high:low)":
+        sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+
+      case "Price(low:high)":
+        sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+
+      default:
+        getAllProducts(); // Reset to default
+        setSort("Default");
+        return;
+    }
+
+    setSort(value);
+    setProducts(sortedProducts);
+  };
+
+
+  useEffect(() => {
+    getAllProducts();
+    getCategoriesName();
+ 
+  }, []);
 
   return (
-    <productsContext.Provider value={{ products, handelSortingData ,sort }}>
+    <ProductsContext.Provider
+      value={{
+        products,
+        handleSortingData,
+        sort,
+        getCategoriesName,
+        productsOfCategory,
+        categoryName,
+        getProductsOfCategory,
+      }}
+    >
       {children}
-    </productsContext.Provider>
+    </ProductsContext.Provider>
   );
 };
