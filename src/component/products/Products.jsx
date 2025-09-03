@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import "./products.css";
 import Product from "../../common/product/product";
-import { useLocation ,Link} from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { ProductsContext } from "../../context/ProductsContext";
-
 
 const Products = () => {
   const location = useLocation();
