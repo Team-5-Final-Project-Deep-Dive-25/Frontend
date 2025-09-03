@@ -78,24 +78,76 @@ input{
 }
 
 
-
-@media (max-width: 768px) {
+@media (min-width: 1025px) {
   .login {
-    flex-direction: column;
+    flex-direction: row;
+    gap: 40px;
   }
 
-  .login-image img {
-    width: 180px; 
+  .login-img img {
+    max-width: 700px;
   }
 
   .login-container {
-    width: 100%; 
-    max-width: 350px;
+    width: 60%;
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .login {
+    flex-direction: row;
+    gap: 30px;
+  }
+
+  .login-img img {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .login-container {
+    width: 45%;
+    max-width: 400px;
+    padding: 30px;
   }
 
   .login-container p:nth-of-type(1),
   .login-container p:nth-of-type(2) {
-    text-align: center; 
+    text-align: left;
+    font-size: 18px;
+  }
+
+  .login-actions {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .login-btn {
+    width: auto;
+  }
+}
+
+/* Mobile < 768px */
+@media (max-width: 667px) {
+  .login {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .login-img img {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .login-container {
+    width: 90%;
+    max-width: 350px;
+    padding: 20px;
+  }
+
+  .login-container p:nth-of-type(1),
+  .login-container p:nth-of-type(2) {
+    text-align: center;
   }
 
   .login-actions {
@@ -106,4 +158,18 @@ input{
   .login-btn {
     width: 100%;
   }
+}
+
+
+
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
 }

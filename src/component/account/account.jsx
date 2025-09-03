@@ -12,6 +12,8 @@ const EditProfile = () => {
     confirmNewPassword: ""
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -20,16 +22,84 @@ const EditProfile = () => {
     }));
   };
 
+  const validateForm = () => {
+    let newErrors = {};
+
+    // First Name
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "First name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(formData.firstName)) {
+      newErrors.firstName = "First name must contain only letters";
+    }
+
+    // Last Name
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Last name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(formData.lastName)) {
+      newErrors.lastName = "Last name must contain only letters";
+    }
+
+    // Email
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = "Enter a valid email address";
+      }
+    }
+
+    // Current Password
+    if (!formData.currentPassword.trim()) {
+      newErrors.currentPassword = "Current password is required";
+    }
+
+    // New Password
+    if (formData.newPassword.trim() && formData.newPassword.length < 6) {
+      newErrors.newPassword = "New password must be at least 6 characters";
+    }
+
+    // Confirm New Password
+    if (formData.newPassword !== formData.confirmNewPassword) {
+      newErrors.confirmNewPassword = "Passwords do not match";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleCancel = () => {
     alert("Changes canceled");
+
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      address: "",
+      currentPassword: "",
+      newPassword: "",
+      confirmNewPassword: ""
+    });
+    setErrors({});
   };
 
   const handleSaveChanges = () => {
-    if (formData.newPassword !== formData.confirmNewPassword) {
-      alert("New passwords do not match!");
-      return;
-    }
-    alert("Changes saved!");
+    if (!validateForm()) return;
+
+    alert("Changes saved successfully!");
+    console.log("Form Data ✅", formData);
+
+    // Reset form after saving
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      address: "",
+      currentPassword: "",
+      newPassword: "",
+      confirmNewPassword: ""
+    });
+    setErrors({});
   };
 
   return (
@@ -57,21 +127,28 @@ const EditProfile = () => {
         <h3>Edit Your Profile</h3>
         <form>
           <div className="input-row">
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              value={formData.firstName}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              value={formData.lastName}
-              onChange={handleChange}
-            />
+            <div>
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+              {errors.firstName && <p className="error">{errors.firstName}</p>}
+            </div>
+            <div>
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+              {errors.lastName && <p className="error">{errors.lastName}</p>}
+            </div>
           </div>
+
           <input
             type="email"
             name="email"
@@ -79,6 +156,8 @@ const EditProfile = () => {
             value={formData.email}
             onChange={handleChange}
           />
+          {errors.email && <p className="error">{errors.email}</p>}
+
           <input
             type="text"
             name="address"
@@ -86,7 +165,9 @@ const EditProfile = () => {
             value={formData.address}
             onChange={handleChange}
           />
+
           <h4>Password Changes</h4>
+
           <input
             type="password"
             name="currentPassword"
@@ -94,6 +175,8 @@ const EditProfile = () => {
             value={formData.currentPassword}
             onChange={handleChange}
           />
+          {errors.currentPassword && <p className="error">{errors.currentPassword}</p>}
+
           <input
             type="password"
             name="newPassword"
@@ -101,6 +184,8 @@ const EditProfile = () => {
             value={formData.newPassword}
             onChange={handleChange}
           />
+          {errors.newPassword && <p className="error">{errors.newPassword}</p>}
+
           <input
             type="password"
             name="confirmNewPassword"
@@ -108,6 +193,8 @@ const EditProfile = () => {
             value={formData.confirmNewPassword}
             onChange={handleChange}
           />
+          {errors.confirmNewPassword && <p className="error">{errors.confirmNewPassword}</p>}
+
           <div className="btn-group">
             <button type="button" onClick={handleCancel} className="cancel-btn">
               Cancel
@@ -122,4 +209,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditProfile;

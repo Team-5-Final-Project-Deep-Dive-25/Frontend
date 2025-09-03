@@ -2,41 +2,169 @@ import { useState } from "react";
 import "./Checkout.css";
 
 export default function Checkout() {
-  const [payment, setPayment] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    company: "",
+    street: "",
+    apartment: "",
+    city: "",
+    phone: "",
+    email: "",
+    payment: "",
+    coupon: ""
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!formData.firstName) newErrors.firstName = "First name is required";
+    if (!formData.street) newErrors.street = "Street address is required";
+    if (!formData.city) newErrors.city = "City is required";
+
+    if (!formData.phone) {
+      newErrors.phone = "Phone number is required";
+    } else {
+      const phoneRegex = /^[0-9]{10,15}$/;
+      if (!phoneRegex.test(formData.phone)) {
+        newErrors.phone = "Enter a valid phone number (10-15 digits)";
+      }
+    }
+
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = "Enter a valid email address";
+      }
+    }
+
+    if (!formData.payment) newErrors.payment = "Please select a payment method";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    console.log("Form submitted ✅:", formData);
+    alert("Order placed successfully!");
+
+    // 🟢 Reset all fields
+    setFormData({
+      firstName: "",
+      company: "",
+      street: "",
+      apartment: "",
+      city: "",
+      phone: "",
+      email: "",
+      payment: "",
+      coupon: ""
+    });
+
+    setErrors({});
+  };
+
+  const handleApplyCoupon = () => {
+    if (formData.coupon.trim() !== "") {
+      alert(`Coupon "${formData.coupon}" applied! 🎉`);
+
+      // 🟢 Reset coupon field only
+      setFormData({ ...formData, coupon: "" });
+    }
+  };
 
   return (
     <div className="checkout">
-  
       <div className="billing">
         <h2>Billing Details</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label>
             First Name*
-            <input type="text" required />
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+            />
+            {errors.firstName && <p className="error">{errors.firstName}</p>}
           </label>
+
           <label>
             Company Name
-            <input type="text" required/>
+            <input
+              type="text"
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+            />
           </label>
+
           <label>
             Street Address*
-            <input type="text" required/>
+            <input
+              type="text"
+              name="street"
+              value={formData.street}
+              onChange={handleChange}
+            />
+            {errors.street && <p className="error">{errors.street}</p>}
           </label>
+
           <label>
             Apartment, floor, etc. (optional)
-            <input type="text" />
+            <input
+              type="text"
+              name="apartment"
+              value={formData.apartment}
+              onChange={handleChange}
+            />
           </label>
+
           <label>
             Town/City*
-            <input type="text" required/>
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+            />
+            {errors.city && <p className="error">{errors.city}</p>}
           </label>
+
           <label>
             Phone Number*
-            <input type="text" required/>
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+            {errors.phone && <p className="error">{errors.phone}</p>}
           </label>
+
           <label>
             Email Address*
-            <input type="email" required/>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            {errors.email && <p className="error">{errors.email}</p>}
           </label>
 
           <div className="save-info">
@@ -48,16 +176,15 @@ export default function Checkout() {
         </form>
       </div>
 
-      {/* Order Summary */}
       <div className="summary">
         <h2>Your Order</h2>
         <div className="product">
-          <img src="//" alt="LCD Monitor" />
+          <img src="/public/Screenshot 2025-01-26 161002.png" alt="LCD Monitor" />
           <span>LCD Monitor</span>
           <span>$650</span>
         </div>
         <div className="product">
-          <img src="//" alt="Gamepad" />
+          <img src="/public/img.png" alt="Gamepad"  />
           <span>H1 Gamepad</span>
           <span>$1100</span>
         </div>
@@ -75,39 +202,54 @@ export default function Checkout() {
           <span>$1750</span>
         </div>
 
-       <div className="payment">
-  <label className={payment === "bank" ? "active" : ""}>
-    <input
-      type="radio"
-      name="payment"
-      value="bank"
-      checked={payment === "bank"}
-      onChange={(e) => setPayment(e.target.value)}
-    />
-    Bank
-    { <span className="checkmark">✔</span> }
-  </label>
+        <div className="payment">
+          <label className={formData.payment === "bank" ? "active" : ""}>
+            <input
+              type="radio"
+              name="payment"
+              value="bank"
+              checked={formData.payment === "bank"}
+              onChange={handleChange}
+            />
+            Bank
+            {formData.payment === "bank" && (
+              <span className="checkmark">✔</span>
+            )}
+          </label>
 
-  <label className={payment === "cash" ? "active" : ""}>
-    <input
-      type="radio"
-      name="payment"
-      value="cash"
-      checked={payment === "cash"}
-      onChange={(e) => setPayment(e.target.value)}
-    />
-    Cash on delivery
-    { <span className="checkmark">✔</span> }
-  </label>
-</div>
+          <label className={formData.payment === "cash" ? "active" : ""}>
+            <input
+              type="radio"
+              name="payment"
+              value="cash"
+              checked={formData.payment === "cash"}
+              onChange={handleChange}
+            />
+            Cash on delivery
+            {formData.payment === "cash" && (
+              <span className="checkmark">✔</span>
+            )}
+          </label>
 
-
-        <div className="coupon">
-          <input type="text" placeholder="Coupon Code" />
-          <button>Apply Coupon</button>
+          {errors.payment && <p className="error">{errors.payment}</p>}
         </div>
 
-        <button className="place-order">Place Order</button>
+        <div className="coupon">
+          <input
+            type="text"
+            name="coupon"
+            placeholder="Coupon Code"
+            value={formData.coupon}
+            onChange={handleChange}
+          />
+          <button type="button" onClick={handleApplyCoupon}>
+            Apply Coupon
+          </button>
+        </div>
+
+        <button className="place-order" onClick={handleSubmit}>
+          Place Order
+        </button>
       </div>
     </div>
   );

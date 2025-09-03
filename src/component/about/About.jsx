@@ -2,6 +2,10 @@ import React from "react";
 import "./about.css";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
+import { TbTruckDelivery } from "react-icons/tb";
+import { RiCustomerServiceLine } from "react-icons/ri";
+import { IoShieldCheckmark } from "react-icons/io5";
+
 const team = [
   {
     name: "Zjbkbgig",
@@ -102,7 +106,8 @@ const About = () => {
 <section className="features">
       <div className="feature-card">
         <div className="icon">
-          <i className="bi bi-truck"></i>
+          {/* <i className="bi bi-truck"></i> */}
+          <TbTruckDelivery />
         </div>
         <h3>FREE AND FAST DELIVERY</h3>
         <p>Free delivery for all orders over $140</p>
@@ -110,15 +115,17 @@ const About = () => {
 
       <div className="feature-card">
         <div className="icon">
-          <i className="bi bi-headset"></i>
+          {/* <i className="bi bi-headset"></i> */}
+          <RiCustomerServiceLine />
         </div>
         <h3>24/7 CUSTOMER SERVICE</h3>
         <p>Friendly 24/7 customer support</p>
       </div>
-
+         
       <div className="feature-card">
-        <div className="icon">
-          <i className="bi bi-shield-check"></i>
+        <div className="icon"> 
+          <IoShieldCheckmark />
+          {/* <i className="bi bi-shield-check"></i> */}
         </div>
         <h3>MONEY BACK GUARANTEE</h3>
         <p>We return money within 30 days</p>
