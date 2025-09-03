@@ -1,34 +1,49 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { productsContext } from "../../context/ProductsContext";
+import { ProductsContext } from "../../context/ProductsContext";
 import Product from "../../common/product/product";
 
-
 import { FaRegHeart, FaShippingFast, FaShieldAlt } from "react-icons/fa";
+import axios from "axios";
 
 import "./ProductDetails.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { products } = useContext(productsContext);
+  const { products } = useContext(ProductsContext);
 
-  const product = products.find((p) => p.id === Number(id));
+  const [product, setProduct] = useState(null);
   const [mainImg, setMainImg] = useState("");
   const [count, setCount] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (product) {
-      setMainImg(product.thumbnail);
-    }
-  }, [product]);
+    const fetchProduct = async () => {
+      try {
+        let found = products.find((p) => p.id === Number(id));
+        if (!found) {
+          const res = await axios.get(`https://dummyjson.com/products/${id}`);
+          found = res.data;
+        }
+        setProduct(found);
+        setMainImg(found?.thumbnail || "");
+      } catch (err) {
+        console.error("Error fetching product:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!product) return <p>Loading...</p>;
+    fetchProduct();
+  }, [products, id]);
 
-  const previewImages = product.images && product.images.length > 0
-    ? product.images.length >= 4
+  if (loading) return <p>Loading product...</p>;
+  if (!product) return <p>Product not found.</p>;
+
+  const previewImages =
+    product?.images?.length > 0
       ? product.images.slice(0, 4)
-      : [...product.images, ...Array(4 - product.images.length).fill(product.thumbnail)]
-    : [product.thumbnail, product.thumbnail, product.thumbnail, product.thumbnail];
+      : [product.thumbnail, product.thumbnail, product.thumbnail, product.thumbnail];
 
   const related = products.filter(
     (p) => p.category === product.category && p.id !== product.id
@@ -42,7 +57,7 @@ const ProductDetails = () => {
             <img
               key={i}
               src={img}
-              alt={product.title}
+              alt={product?.title || "product"}
               className={`thumb ${mainImg === img ? "active" : ""}`}
               onClick={() => setMainImg(img)}
             />
@@ -50,13 +65,13 @@ const ProductDetails = () => {
         </div>
 
         <div className="main-image">
-          <img src={mainImg} alt={product.title} />
+          <img src={mainImg} alt={product?.title || "product"} />
         </div>
 
         <div className="details">
-          <h2 className="title">{product.title}</h2>
-          <h3 className="price">${product.price}</h3>
-          <p className="desc">{product.description}</p>
+          <h2 className="title">{product?.title || "No Title"}</h2>
+          <h3 className="price">${product?.price || 0}</h3>
+          <p className="desc">{product?.description || "No description"}</p>
 
           <div className="quantity">
             <button onClick={() => setCount(count > 1 ? count - 1 : 1)}>-</button>

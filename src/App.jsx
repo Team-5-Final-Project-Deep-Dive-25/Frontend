@@ -9,12 +9,14 @@ import Contact from "./component/contact/Contact";
 import SignUp from "./component/signup/Signup";
 import Wishlist from "./component/wishlist/Wishlist";
 import Login from "./component/login/login";
-import ProductsOfCat  from'./component/productsOfCategory/ProductsOfCat'
+import ProductsOfCat from './component/productsOfCategory/ProductsOfCat'
 
 import Products from "./component/products/Products";
 
 import NotFound from "./component/error404/notfound";
-import Account from './component/account/account'; 
+import Account from './component/account/account';
+import ProductDetails from "./component/ProductDetails/ProductDetails";
+
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -60,10 +62,14 @@ const App = () => {
           element: <ProductsOfCat />,
         },
         {
-          path:"account",
-          element:<Account />
+          path: "account",
+          element: <Account />
         },
-        
+        {
+          path: "product/:id",
+          element: <ProductDetails />,
+        },
+
       ],
     },
   ]);

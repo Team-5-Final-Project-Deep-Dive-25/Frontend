@@ -8,14 +8,15 @@ const Product = ({ ele }) => {
     <div className="container-card">
       <div className="container-card-img">
         <img src={ele?.thumbnail} alt="product" className="product-image" />
-        <Process ele={ele} />
+        <Process productId={ele?.id} />
         <button className="add-to-cart-btn">Add to Cart</button>
       </div>
 
       <div className="container-card-details">
         <h2 className="product-title">
-          {ele?.title.split(" ").slice(0, 3).join(" ")}
+          {ele?.title ? ele.title.split(" ").slice(0, 3).join(" ") : ""}
         </h2>
+
 
         <div className="product-info-row">
           <p className="product-price m-0">
