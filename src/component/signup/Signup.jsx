@@ -1,40 +1,62 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./signup.css";
-import signup_img from './../../assets//images/register.jpg';
+import signup_img from "./../../assets/images/register.jpg";
 import { Link } from "react-router-dom";
+import Register from "./../../Apis/Register";
 
 export default function Signup() {
-  const [name, setName] = useState("");
-  const [gender, setGender] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const nameRef = useRef();
+  const genderRef = useRef();
+  const addressRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
   const [errors, setErrors] = useState({});
 
-  const validate = () => {
+  const validate = (data) => {
     const newErrors = {};
-    if (!name) newErrors.name = "Name is required";
-    if (!gender) newErrors.gender = "Gender is required";
-    if (!address) newErrors.address = "Address is required";
-    if (!email.includes("@")) newErrors.email = "Email is invalid";
-    if (password.length < 6)
+    if (!data.name) newErrors.name = "Name is required";
+    if (!data.gender) newErrors.gender = "Gender is required";
+    if (!data.address) newErrors.address = "Address is required";
+    if (!data.email.includes("@")) newErrors.email = "Email is invalid";
+    if (data.password.length < 6)
       newErrors.password = "Password must be at least 6 characters";
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validate();
+
+    const userData = {
+      name: nameRef.current.value,
+      gender: genderRef.current.value,
+      address: addressRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    };
+
+    console.log(userData)
+
+    const validationErrors = validate(userData);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log({ name, gender, address, email, password });
-      alert("Registered successfully!");
-      setName("");
-      setGender("");
-      setAddress("");
-      setEmail("");
-      setPassword("");
+      console.log("User Data before API:", userData);
+
+      const response = await Register(userData);
+
+      if (response) {
+        console.log("API Response:", response);
+        alert("Registered successfully!");
+        // Clear inputs manually
+        nameRef.current.value = "";
+        genderRef.current.value = "";
+        addressRef.current.value = "";
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
+      } else {
+        alert("Registration failed!");
+      }
     }
   };
 
@@ -49,43 +71,27 @@ export default function Signup() {
           <h2>Create an account</h2>
           <p>Enter your details below</p>
           <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <input type="text" placeholder="Full Name" ref={nameRef} />
             {errors.name && <p className="error">{errors.name}</p>}
 
-            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+            <select ref={genderRef}>
               <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
             {errors.gender && <p className="error">{errors.gender}</p>}
 
-            <input
-              type="text"
-              placeholder="Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
+            <input type="text" placeholder="Address" ref={addressRef} />
             {errors.address && <p className="error">{errors.address}</p>}
 
             <input
               type="email"
               placeholder="Email or Phone Number"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              ref={emailRef}
             />
             {errors.email && <p className="error">{errors.email}</p>}
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <input type="password" placeholder="Password" ref={passwordRef} />
             {errors.password && <p className="error">{errors.password}</p>}
 
             <button type="submit" className="createAccount">

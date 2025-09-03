@@ -8,7 +8,7 @@
 .cont-sale {
     position: relative;
     flex: 0 0 calc(25% - 20px);
-    max-width: calc(25% - 20px);
+    width: calc(25% - 20px);
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -35,7 +35,7 @@
     z-index: 2;
 }
 
-.FlashSales .container button.btn-sale {
+button.btn-sale {
     width: 20%;
     display: flex;
     justify-content: center;
@@ -52,7 +52,7 @@
     text-transform: capitalize;
 }
 
-.FlashSales .container button.btn-sale:hover {
+ button.btn-sale:hover {
     background-color: #fff;
     color: var(--btn-color);
     border: 3px solid var(--btn-color);
@@ -127,22 +127,25 @@
 @media (max-width: 992px) {
 
         .cont-sale {
-            position: relative;
-            flex: 0 0 calc(50% - 20px) !important;
-            max-width: calc(50% - 20px) !important;
+            /* position: relative; */
+            flex: 0 0 calc(50% - 10px) !important;
+           width: calc(50% - 20px) !important;
 
         }
-                .FlashSales .container button.btn-sale{
+                 button.btn-sale{
                     width: 100%;
                 }
 }
 
 @media (max-width: 576px) {
-    .cont-sale {
-        flex: 0 0 100% !important;
-        max-width: 100% !important;
+    .product-sales{
+        flex-direction: column;
     }
-        .FlashSales .container button.btn-sale{
+    .cont-sale {
+        width: 100% !important;
+        margin: 10px 0;
+    }
+         button.btn-sale{
             width: 100%;
         }
 }

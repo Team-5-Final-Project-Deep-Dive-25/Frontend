@@ -64,7 +64,7 @@ export const ProductsContextProvider = ({ children }) => {
         break;
 
       default:
-        getAllProducts(); // Reset to default
+        getAllProducts(); 
         setSort("Default");
         return;
     }

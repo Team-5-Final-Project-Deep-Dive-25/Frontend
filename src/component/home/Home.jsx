@@ -3,6 +3,9 @@ import "./home.css";
 import Heading from "./../heading/Heading";
 import FlashSales from "../flashSales/FlashSales";
 import BrowseCategory from "./../BrowsbyCatecgory/BrowseCategory";
+import ExploreProducts from "../exploreProducts/ExploreProducts";
+import NewArrival from "../newArrival/NewArrival";
+
 
 const Home = () => {
   return (
@@ -10,6 +13,10 @@ const Home = () => {
       <Heading/>
       <FlashSales/>
       <BrowseCategory/>
+      <ExploreProducts/>
+      <NewArrival/>
+   
+
      
     </div>
   );
