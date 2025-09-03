@@ -58,3 +58,9 @@
         display: none;
     }
 }
+
+@media (max-width: 992px) {
+    .Sidebar {
+        display: none;
+    }
+}

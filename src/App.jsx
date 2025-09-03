@@ -63,13 +63,16 @@ const App = () => {
         },
         {
           path: "account",
-          element: <Account />
+          element: <Account />,
         },
         {
           path: "product/:id",
           element: <ProductDetails />,
         },
-
+        {
+          path: "*",
+          element: <NotFound/>,
+        },
       ],
     },
   ]);
