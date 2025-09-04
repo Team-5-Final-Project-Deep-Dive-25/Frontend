@@ -13,6 +13,8 @@ import {
   Spinner,
   Pagination,
 } from "react-bootstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductsPanel = () => {
   const [products, setProducts] = useState([]);
@@ -44,6 +46,7 @@ const ProductsPanel = () => {
       setTotalPages(res.data.pages);
       setCurrentPage(page);
     } catch (error) {
+      toast.error("Failed to load products!");
       console.error(error);
       setProducts([]);
     } finally {
@@ -92,10 +95,12 @@ const ProductsPanel = () => {
         }
       });
       await addProduct(token, form);
+      toast.success("Product added successfully!");
       setShowAddModal(false);
       fetchProducts(currentPage);
       resetForm();
     } catch (error) {
+      toast.error("Failed to add product!");
       console.error("Add product error:", error);
     }
   };
@@ -115,27 +120,56 @@ const ProductsPanel = () => {
         }
       });
       await updateProduct(token, selectedProduct._id, form);
+      toast.success("Product updated successfully!");
       setShowEditModal(false);
       fetchProducts(currentPage);
       resetForm();
     } catch (error) {
+      toast.error("Failed to update product!");
       console.error("Edit product error:", error);
     }
   };
 
-  const handleDeleteProduct = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this product?"))
-      return;
-    try {
-      await deleteProduct(token, id);
-      if (products.length === 1 && currentPage > 1) {
-        fetchProducts(currentPage - 1);
-      } else {
-        fetchProducts(currentPage);
-      }
-    } catch (error) {
-      console.error("Delete product error:", error);
-    }
+  const handleDeleteProduct = (id) => {
+    toast.info(
+      <div>
+        <p>Are you sure you want to delete this product?</p>
+        <div
+          style={{
+            display: "flex",
+            gap: "12px",
+            justifyContent: "center",
+            marginTop: "10px",
+          }}
+        >
+          <Button
+            size="sm"
+            variant="danger"
+            onClick={async () => {
+              try {
+                await deleteProduct(token, id);
+                toast.dismiss();
+                toast.success("Product deleted successfully!");
+                if (products.length === 1 && currentPage > 1) {
+                  fetchProducts(currentPage - 1);
+                } else {
+                  fetchProducts(currentPage);
+                }
+              } catch (error) {
+                toast.error("Failed to delete product!");
+                console.error("Delete product error:", error);
+              }
+            }}
+          >
+            Confirm
+          </Button>
+          <Button size="sm" variant="secondary" onClick={() => toast.dismiss()}>
+            Cancel
+          </Button>
+        </div>
+      </div>,
+      { autoClose: false }
+    );
   };
 
   const openEditModal = (product) => {

@@ -8,14 +8,19 @@ export const ProductsContextProvider = ({ children }) => {
   const [productsOfCategory, setProductsOfCategory] = useState([]);
   const [categoryName, setCategoryName] = useState([]);
   const [sort, setSort] = useState("Default");
+ const [token, setToken] = useState(localStorage.getItem("token"));
+ 
 
   const apiBase = "https://backend-gules-six-47.vercel.app/api";
   const productsURL = `${apiBase}/products`;
   const categoriesURL = `${apiBase}/categories`;
 
   const getAllProducts = async () => {
+   
     try {
-      const { data } = await axios.get(productsURL);
+      const { data } = await axios.get(productsURL, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setProducts(data.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -23,8 +28,11 @@ export const ProductsContextProvider = ({ children }) => {
   };
 
   const getCategoriesName = async () => {
+ 
     try {
-      const { data } = await axios.get(categoriesURL);
+      const { data } = await axios.get(categoriesURL, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setCategoryName(data.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -32,8 +40,14 @@ export const ProductsContextProvider = ({ children }) => {
   };
 
   const getProductsOfCategory = async (categoryId) => {
+  
     try {
-      const { data } = await axios.get(`${productsURL}/category/${categoryId}`);
+      const { data } = await axios.get(
+        `${productsURL}/category/${categoryId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setProductsOfCategory(data.data);
     } catch (error) {
       console.error("Error fetching category products:", error);
@@ -67,10 +81,15 @@ export const ProductsContextProvider = ({ children }) => {
     setProducts(sortedProducts);
   };
 
-  useEffect(() => {
+
+
+
+useEffect(() => {
+
     getAllProducts();
     getCategoriesName();
-  }, []);
+
+}, []);
 
   return (
     <ProductsContext.Provider
@@ -82,6 +101,9 @@ export const ProductsContextProvider = ({ children }) => {
         productsOfCategory,
         categoryName,
         getProductsOfCategory,
+        token,
+        setToken,
+        
       }}
     >
       {children}
