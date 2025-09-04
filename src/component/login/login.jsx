@@ -3,7 +3,8 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { loginUser } from "../../Apis/login";
 import "./login.css";
 import { ProductsContext } from "../../context/ProductsContext";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,11 +29,25 @@ const Login = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
 
-      if (role === "ADMIN") navigate("/admin");
-      else navigate("/account");
+   
+      toast.success("Successfully logged in!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+
+      setTimeout(() => {
+        if (role === "ADMIN") navigate("/admin");
+        else navigate("/account");
+      }, 2000);
     } catch (err) {
       console.error(err);
       setError(err.message || "Login failed");
+
+   
+      toast.error("Login failed! Please check your credentials.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     } finally {
       setLoading(false);
     }
@@ -82,8 +97,10 @@ const Login = () => {
           {error && <p className="error-message">{error}</p>}
         </form>
       </div>
-    </div>
 
+     
+      <ToastContainer />
+    </div>
   );
 };
 
