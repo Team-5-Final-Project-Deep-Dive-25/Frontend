@@ -128,7 +128,6 @@ const ProductsPanel = () => {
       return;
     try {
       await deleteProduct(token, id);
-      // If current page is empty after delete, go back a page if possible
       if (products.length === 1 && currentPage > 1) {
         fetchProducts(currentPage - 1);
       } else {
@@ -154,10 +153,8 @@ const ProductsPanel = () => {
     setShowEditModal(true);
   };
 
-
   const renderPagination = () => {
     let items = [];
-
     let startPage = Math.max(1, currentPage - 2);
     let endPage = Math.min(totalPages, currentPage + 2);
 
@@ -233,165 +230,59 @@ const ProductsPanel = () => {
         </div>
       ) : (
         <>
-          <Table striped bordered hover responsive className="tableproduct">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Rate</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.length > 0 ? (
-                products.map((product) => (
-                  <tr key={product._id}>
-                    <td>{product.name}</td>
-                    <td>{product.description}</td>
-                    <td>{product.price}</td>
-                    <td>{product.stock}</td>
-                    <td>{product.rate}</td>
-                    <td>
-                      <Button
-                        variant="warning"
-                        size="sm"
-                        className="me-2"
-                        onClick={() => openEditModal(product)}
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => handleDeleteProduct(product._id)}
-                      >
-                        Delete
-                      </Button>
+          <div className="table-container">
+            <Table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Rate</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.length > 0 ? (
+                  products.map((product) => (
+                    <tr key={product._id}>
+                      <td data-label="Name">{product.name}</td>
+                      <td data-label="Description">{product.description}</td>
+                      <td data-label="Price">{product.price}</td>
+                      <td data-label="Stock">{product.stock}</td>
+                      <td data-label="Rate">{product.rate}</td>
+                      <td data-label="Actions" className="action-buttons">
+                        <Button
+                          variant="warning"
+                          size="sm"
+                          className="me-2"
+                          onClick={() => openEditModal(product)}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => handleDeleteProduct(product._id)}
+                        >
+                          Delete
+                        </Button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="text-center">
+                      No products found
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6" className="text-center">
-                    No products found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
+                )}
+              </tbody>
+            </Table>
+          </div>
           {renderPagination()}
         </>
       )}
-
-      {/* Add Modal */}
-      <Modal
-        show={showAddModal}
-        onHide={() => setShowAddModal(false)}
-        size="lg"
-        fullscreen="sm-down"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Add Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleAddProduct}>
-            {[
-              "name",
-              "description",
-              "price",
-              "stock",
-              "categoryId",
-              "discountId",
-              "rate",
-            ].map((field) => (
-              <Form.Group className="mb-3" key={field}>
-                <Form.Label>
-                  {field.charAt(0).toUpperCase() + field.slice(1)}
-                </Form.Label>
-                <Form.Control
-                  name={field}
-                  value={formData[field]}
-                  type={
-                    field === "price" || field === "stock" || field === "rate"
-                      ? "number"
-                      : "text"
-                  }
-                  onChange={handleChange}
-                  required={field !== "discountId"}
-                />
-              </Form.Group>
-            ))}
-            <Form.Group className="mb-3">
-              <Form.Label>Images</Form.Label>
-              <Form.Control
-                type="file"
-                name="images"
-                multiple
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Button variant="success" type="submit">
-              Save
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
-
-      {/* Edit Modal */}
-      <Modal
-        show={showEditModal}
-        onHide={() => setShowEditModal(false)}
-        size="lg"
-        fullscreen="sm-down"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleEditProduct}>
-            {[
-              "name",
-              "description",
-              "price",
-              "stock",
-              "categoryId",
-              "discountId",
-              "rate",
-            ].map((field) => (
-              <Form.Group className="mb-3" key={field}>
-                <Form.Label>
-                  {field.charAt(0).toUpperCase() + field.slice(1)}
-                </Form.Label>
-                <Form.Control
-                  name={field}
-                  value={formData[field]}
-                  type={
-                    field === "price" || field === "stock" || field === "rate"
-                      ? "number"
-                      : "text"
-                  }
-                  onChange={handleChange}
-                  required={field !== "discountId"}
-                />
-              </Form.Group>
-            ))}
-            <Form.Group className="mb-3">
-              <Form.Label>New Images (Optional)</Form.Label>
-              <Form.Control
-                type="file"
-                name="images"
-                multiple
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Button variant="success" type="submit">
-              Update
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
     </div>
   );
 };

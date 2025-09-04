@@ -1,4 +1,3 @@
-// src/context/ProductsContext.js
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
@@ -9,18 +8,14 @@ export const ProductsContextProvider = ({ children }) => {
   const [productsOfCategory, setProductsOfCategory] = useState([]);
   const [categoryName, setCategoryName] = useState([]);
   const [sort, setSort] = useState("Default");
- const [token, setToken] = useState(localStorage.getItem("token"));// تعريف واحد للتوكن
 
   const apiBase = "https://backend-gules-six-47.vercel.app/api";
   const productsURL = `${apiBase}/products`;
   const categoriesURL = `${apiBase}/categories`;
 
   const getAllProducts = async () => {
-    if (!token) return;
     try {
-      const { data } = await axios.get(productsURL, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data } = await axios.get(productsURL);
       setProducts(data.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -28,11 +23,8 @@ export const ProductsContextProvider = ({ children }) => {
   };
 
   const getCategoriesName = async () => {
-    if (!token) return;
     try {
-      const { data } = await axios.get(categoriesURL, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data } = await axios.get(categoriesURL);
       setCategoryName(data.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -40,14 +32,8 @@ export const ProductsContextProvider = ({ children }) => {
   };
 
   const getProductsOfCategory = async (categoryId) => {
-    if (!token) return;
     try {
-      const { data } = await axios.get(
-        `${productsURL}/category/${categoryId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const { data } = await axios.get(`${productsURL}/category/${categoryId}`);
       setProductsOfCategory(data.data);
     } catch (error) {
       console.error("Error fetching category products:", error);
@@ -81,15 +67,10 @@ export const ProductsContextProvider = ({ children }) => {
     setProducts(sortedProducts);
   };
 
-
-
-
-useEffect(() => {
-  if (token) {
+  useEffect(() => {
     getAllProducts();
     getCategoriesName();
-  }
-}, [token]);
+  }, []);
 
   return (
     <ProductsContext.Provider
@@ -101,8 +82,6 @@ useEffect(() => {
         productsOfCategory,
         categoryName,
         getProductsOfCategory,
-        token,
-        setToken, // مهم لتحديث التوكن بعد تسجيل الدخول
       }}
     >
       {children}

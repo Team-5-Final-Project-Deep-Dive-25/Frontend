@@ -83,7 +83,7 @@ const ProductDetails = () => {
         </div>
 
         <div className="details">
-          <h2 className="title">{product?.title || "No Title"}</h2>
+          <h2 className="title">{product?.name || "No Title"}</h2>
           <h3 className="price">${product?.price || 0}</h3>
           <p className="desc">{product?.description || "No description"}</p>
 
