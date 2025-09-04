@@ -2,6 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ProductsContext } from "../../context/ProductsContext";
 import Product from "../../common/product/product";
+import { CartContext } from "../../context/CartContext";
+
+
 
 import { FaRegHeart, FaShippingFast, FaShieldAlt } from "react-icons/fa";
 import axios from "axios";
@@ -9,6 +12,8 @@ import axios from "axios";
 import "./ProductDetails.css";
 
 const ProductDetails = () => {
+  const { addToCart } = useContext(CartContext);
+
   const { id } = useParams();
   const { products } = useContext(ProductsContext);
 
@@ -80,7 +85,7 @@ const ProductDetails = () => {
           </div>
 
           <div className="actions">
-            <button className="cart">Add to Cart</button>
+            <button className="cart" onClick={() => addToCart(product, count)}>Add to Cart</button>
             <button className="fav">
               <FaRegHeart />
             </button>

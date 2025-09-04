@@ -69,6 +69,11 @@ const App = () => {
           path: "product/:id",
           element: <ProductDetails />,
         },
+        {
+          path: "*",
+          element: < NotFound />,
+
+        }
 
       ],
     },

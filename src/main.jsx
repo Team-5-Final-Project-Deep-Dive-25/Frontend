@@ -4,9 +4,13 @@ import App from "./App.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { ProductsContextProvider } from "./context/ProductsContext.jsx";
+import { CartProvider } from "./context/CartContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <ProductsContextProvider>
-    <App />
+    <CartProvider>
+      <App />
+    </CartProvider>
+
   </ProductsContextProvider>
 );

@@ -49,7 +49,7 @@
     display: flex;
     gap: 15px;
     align-items: flex-start;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); */
     height: 100%;
 }
 
@@ -93,7 +93,7 @@
     background: var(--card-bg);
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    /* box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); */
     display: flex;
     flex-direction: column;
     gap: 25px;
