@@ -7,8 +7,8 @@ const BrowseCategory = () => {
   const navigate = useNavigate();
   const { categoryName, getProductsOfCategory } = useContext(ProductsContext);
 
-  const handleGetCategory = (url) => {
-    getProductsOfCategory(url);
+  const handleGetCategory = (categoryId) => {
+    getProductsOfCategory(categoryId);
     navigate("/ProductsOfCat");
   };
 
@@ -17,19 +17,19 @@ const BrowseCategory = () => {
       <div className="container">
         <div className="section-heading">
           <div>
-          <p>Categories</p>
+            <p>Categories</p>
           </div>
           <h2>Browse By Category</h2>
         </div>
 
         <div className="container-allCat my-5">
-          {categoryName.slice(0, 6).map((val, index) => (
+          {categoryName.map((val, index) => (
             <div
               key={index}
               className="cat-btn"
-              onClick={() => handleGetCategory(val.url)}
+              onClick={() => handleGetCategory(val._id)} // تعديل هنا لاستخدام _id
             >
-              <p className="m-0 m-auto">{val.name}</p>
+              <p className="m-0 m-auto">{val.title}</p>
             </div>
           ))}
         </div>

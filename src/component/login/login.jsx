@@ -1,32 +1,86 @@
+import React, { useContext, useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+import { loginUser } from "../../Apis/login";
+import "./login.css";
+import { ProductsContext } from "../../context/ProductsContext";
 
-import React from 'react';
-import './login.css';
 const Login = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { setToken } = useContext(ProductsContext);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const { token, role } = await loginUser({
+        email: email,
+        password: password,
+      });
+
+      setToken(token);
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
+
+      if (role === "ADMIN") navigate("/admin");
+      else navigate("/account");
+    } catch (err) {
+      console.error(err);
+      setError(err.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const ProtectedAdminRoute = ({ children }) => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    if (!token || role !== "ADMIN") {
+      return <Navigate to="/login" replace />;
+    }
+    return children;
+  };
+
   return (
     <div className="login">
       <div className="login-img">
-        <img src="/public/loginimage.jpg" alt="loginimg"/>
+        <img src="/public/loginimage.jpg" alt="loginimg" />
       </div>
-        <div className="login-container">
-            <p >  Log in to Exclusive</p>
-            <p>Enter your details below</p>
-            <form>
-                <input type="email" required placeholder='Email or Phone Number' />
-                <input type="password" required placeholder='Password'/>
-                
+      <div className="login-container">
+        <p>Log in to Exclusive</p>
+        <p>Enter your details below</p>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            required
+            placeholder="Email or Phone Number"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            required
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <div className="login-actions">
-          <button type="submit" className="login-btn">
-            Log In
-          </button>
+            <button type="submit" className="login-btn" disabled={loading}>
+              {loading ? "Logging in..." : "Log In"}
+            </button>
             <a href="/forgot-password" className="forgot-link">
               Forgot Password?
             </a>
-              </div>
-            </form>
-            
-        
-       
-        </div>
+          </div>
+          {error && <p className="error-message">{error}</p>}
+        </form>
+      </div>
     </div>
   );
 };

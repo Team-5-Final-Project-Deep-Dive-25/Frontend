@@ -19,18 +19,19 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { products } = useContext(ProductsContext);
 
-  const filteredProducts =
-    searchTerm.trim() === ""
-      ? []
-      : products.filter((product) =>
-          product.title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+ const filteredProducts =
+   searchTerm.trim() === ""
+     ? []
+     : products.filter((product) =>
+         product.name.toLowerCase().includes(searchTerm.toLowerCase())
+       );
 
-  const handleSearchSelect = (id, title) => {
-    navigate(`/product/${id}`);
-    setSearchTerm(title);
-    setShowDropdown(false);
-  };
+ const handleSearchSelect = (id, name) => {
+   navigate(`/product/${id}`);
+   setSearchTerm(name);
+   setShowDropdown(false);
+ };
+
 
   return (
     <div className="Navbar">
@@ -77,13 +78,13 @@ const Navbar = () => {
               <div className="search-dropdown">
                 {filteredProducts.map((product) => (
                   <div
-                    key={product.id}
+                    key={product._id} 
                     className="search-item"
                     onClick={() =>
-                      handleSearchSelect(product.id, product.title)
-                    }
+                      handleSearchSelect(product._id, product.name)
+                    } 
                   >
-                    {product.title}
+                    {product.name}
                   </div>
                 ))}
               </div>

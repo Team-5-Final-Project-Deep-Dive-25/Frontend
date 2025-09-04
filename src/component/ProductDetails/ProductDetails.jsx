@@ -4,7 +4,7 @@ import { ProductsContext } from "../../context/ProductsContext";
 import Product from "../../common/product/product";
 
 import { FaRegHeart, FaShippingFast, FaShieldAlt } from "react-icons/fa";
-import axios from "axios";
+import { getProductById } from "../../Apis/products"; // استخدمنا الـ API اللي جهزته
 
 import "./ProductDetails.css";
 
@@ -20,13 +20,13 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        let found = products.find((p) => p.id === Number(id));
+        let found = products.find((p) => p._id === id); // خلي بالك هنا لازم تقارن بالـ id كـ string
         if (!found) {
-          const res = await axios.get(`https://dummyjson.com/products/${id}`);
-          found = res.data;
+          const token = localStorage.getItem("token"); // افترضنا إن التوكن متخزن هنا
+          found = await getProductById(token, id);
         }
         setProduct(found);
-        setMainImg(found?.thumbnail || "");
+        setMainImg(found?.images?.[0] || "");
       } catch (err) {
         console.error("Error fetching product:", err);
       } finally {
@@ -43,10 +43,10 @@ const ProductDetails = () => {
   const previewImages =
     product?.images?.length > 0
       ? product.images.slice(0, 4)
-      : [product.thumbnail, product.thumbnail, product.thumbnail, product.thumbnail];
+      : [product.images, product.images, product.images, product.images];
 
   const related = products.filter(
-    (p) => p.category === product.category && p.id !== product.id
+    (p) => p.category === product.category && p._id !== product._id
   );
 
   return (
@@ -74,7 +74,9 @@ const ProductDetails = () => {
           <p className="desc">{product?.description || "No description"}</p>
 
           <div className="quantity">
-            <button onClick={() => setCount(count > 1 ? count - 1 : 1)}>-</button>
+            <button onClick={() => setCount(count > 1 ? count - 1 : 1)}>
+              -
+            </button>
             <span>{count}</span>
             <button onClick={() => setCount(count + 1)}>+</button>
           </div>
@@ -119,7 +121,7 @@ const ProductDetails = () => {
         </div>
         <div className="related-flex">
           {related.slice(0, 4).map((item) => (
-            <Product key={item.id} ele={item} />
+            <Product key={item._id} ele={item} />
           ))}
         </div>
       </div>

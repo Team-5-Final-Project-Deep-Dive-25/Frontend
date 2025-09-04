@@ -10,6 +10,9 @@
     justify-content: space-between;
     align-items: center;
 }
+.pageHeading{
+    flex-wrap: wrap;
+}
 
 .pageHeading span.active {
     color: var(--btn-color);
@@ -37,15 +40,19 @@
 .container-all-products {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     gap: 20px;
     justify-content:flex-start;
 }
 
 
-.product-wrapper {
-    flex: 1 0 calc(25% - 20px);
-    max-width: calc(25% - 20px);
-    box-sizing: border-box;
+.product-wrapper { 
+        position: relative;
+            flex: 0 0 calc(25% - 20px);
+            width: calc(25% - 20px);
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
 }
 
 

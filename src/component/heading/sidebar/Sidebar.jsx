@@ -1,34 +1,34 @@
-import React ,{useContext} from 'react'
-import './sidebar.css'
-
+import React, { useContext } from "react";
+import "./sidebar.css";
 import { useNavigate } from "react-router-dom";
 import { ProductsContext } from "../../../context/ProductsContext";
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const { categoryName, getProductsOfCategory } = useContext(ProductsContext);
 
-  const handleGetCategory = (url) => {
-    getProductsOfCategory(url);
+  const handleGetCategory = (categoryId) => {
+    getProductsOfCategory(categoryId);
     navigate("/ProductsOfCat");
   };
 
   return (
     <div className="Sidebar">
       <div className="container">
-        <ul>
-          {categoryName.slice(0, 6).map((val, index) => (
+        <ul className="category-list">
+          {categoryName.map((val, index) => (
             <div
               key={index}
               className="cat-btn"
-              onClick={() => handleGetCategory(val.url)}
+              onClick={() => handleGetCategory(val._id)}
             >
-              <li className="m-0 m-auto">{val.name}</li>
+              <li className="m-0 m-auto">{val.title}</li>
             </div>
           ))}
         </ul>
       </div>
     </div>
   );
-}
+};
 
-export default Sidebar
+export default Sidebar;

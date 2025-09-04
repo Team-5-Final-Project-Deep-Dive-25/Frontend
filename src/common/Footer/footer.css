@@ -4,6 +4,9 @@ footer {
     border-top: 2px solid var(--main-color) !important;
     padding-top: 2rem;
     padding-bottom: 2rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 footer h5 {
@@ -12,7 +15,7 @@ footer h5 {
     color: var(--body-color);
     font-size: 1.1rem;
   
-    margin-bottom: 1.2rem;
+    /* margin-bottom: 1.2rem; */
 }
 
 footer p,
@@ -42,7 +45,7 @@ footer .icon:hover {
     color: var(--main-color) !important;
 }
 
-
+/* 
 .row.gy-4>div {
     margin-bottom: 2.2rem;
-}
+} */

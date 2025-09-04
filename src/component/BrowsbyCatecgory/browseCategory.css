@@ -1,14 +1,21 @@
-
 .container-allCat {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    display: flex;
     gap: 22px;
-    justify-content: center;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: gray transparent;
+
 }
 
 
 .container-allCat>.cat-btn {
+    flex: 0 0 calc((100% - (22px * 3)) / 4);
+    scroll-snap-align: start;
     width: 100%;
     height: 145px;
     border-radius: 4px;
@@ -64,13 +71,28 @@
     color: white;
 }
 
-
 @media (max-width: 576px) {
+    .container-allCat {
+        flex-wrap: wrap;
+        height: 240px;
+
+    }
+
     .container-allCat>.cat-btn {
-        height: 130px;
+        flex: 0 0 calc(50% - 11px);
+        height: 110px;
     }
 
     .container-allCat>.cat-btn p {
-        font-size: 18px;
+        font-size: 16px;
     }
+}
+
+.container-allCat::-webkit-scrollbar {
+    height: 6px;
+}
+
+.container-allCat::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 4px;
 }
