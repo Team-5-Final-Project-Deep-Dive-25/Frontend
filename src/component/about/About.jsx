@@ -8,51 +8,51 @@ import { IoShieldCheckmark } from "react-icons/io5";
 
 const team = [
   {
-    name: "Zjbkbgig",
-    track: "Frontend Developer",
-    img: "/images/zena.jpg",
-    github: "https://github.com/zena",
-    linkedin: "https://linkedin.com/in/zena"
+    name: "Zena Ahmed",
+    track: "Frontend",
+    img: "/public/avatarfemale.jpg",
+    github: "//",
+    linkedin: "//"
   },
   {
-    name: "Ajbkbkb",
-    track: "Backend Developer",
-    img: "/images/ahmed.jpg",
-    github: "https://github.com/ahmed",
-    linkedin: "https://linkedin.com/in/ahmed"
+    name: "Noura Mohamed",
+    track: "Frontend",
+    img: "/public/avatarfemale.jpg",
+    github: "/",
+    linkedin: "//"
   },
   {
-    name: "Sajvkbki",
-    track: "UI/UX Designer",
-    img: "/images/sara.jpg",
+    name: "Nehal Reda",
+    track: "Frontend",
+    img: "/public/avatarfemale.jpg",
     github: "https://github.com/sara",
     linkedin: "https://linkedin.com/in/sara"
   },
   {
-    name: "Omkhlhl",
-    track: "Fullstack Developer",
-    img: "/images/omar.jpg",
+    name: "Menna Elgharabawi",
+    track: "Backend",
+    img: "/public/avatarfemale.jpg",
     github: "https://github.com/omar",
     linkedin: "https://linkedin.com/in/omar"
   },
   {
-    name: "Mkbknk",
-    track: "Mobile Developer",
-    img: "/images/mona.jpg",
+    name: "Alaa",
+    track: "Backend",
+    img: "/public/avatarfemale.jpg",
     github: "https://github.com/mona",
     linkedin: "https://linkedin.com/in/mona"
   },
   {
-    name: "Yihkhn",
-    track: "Data Scientist",
-    img: "/images/youssef.jpg",
+    name: "Khaled Mahmoud",
+    track: "Backend",
+    img: "/public/avatarmale.jpg",
     github: "https://github.com/youssef",
     linkedin: "https://linkedin.com/in/youssef"
   },
   {
-    name: "Laila Hassan",
-    track: "Tester / QA",
-    img: "/images/laila.jpg",
+    name: "Ahmed Ewaida",
+    track: "Flutter",
+    img: "/public/avatarmale.jpg",
     github: "https://github.com/laila",
     linkedin: "https://linkedin.com/in/laila"
   }
