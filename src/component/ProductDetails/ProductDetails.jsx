@@ -21,6 +21,8 @@ const ProductDetails = () => {
   const [mainImg, setMainImg] = useState("");
   const [count, setCount] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [added, setAdd] = useState(false)
+
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -53,7 +55,14 @@ const ProductDetails = () => {
   const related = products.filter(
     (p) => p.category === product.category && p.id !== product.id
   );
+  function handleAdd() {
 
+    addToCart({ ...product, quantity: count });
+    setAdd(true);
+    setTimeout(() => setAdd(false), 2000);
+
+
+  }
   return (
     <div className="product-details-page">
       <div className="product-section">
@@ -85,7 +94,9 @@ const ProductDetails = () => {
           </div>
 
           <div className="actions">
-            <button className="cart" onClick={() => addToCart(product, count)}>Add to Cart</button>
+            <button className="cart" onClick={handleAdd}>
+              {added ? "Added to cart!" : "Add to Cart"}
+            </button>
             <button className="fav">
               <FaRegHeart />
             </button>

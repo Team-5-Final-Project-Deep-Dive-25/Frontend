@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import React from "react";
 import "./product.css";
 import Process from "./Process";
@@ -6,13 +6,26 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { CartContext } from "../../context/CartContext";
 
 const Product = ({ ele }) => {
+  const [added, setAdd] = useState(false)
+
+
+  function handleAdd() {
+
+    addToCart(ele);
+    setAdd(true);
+    setTimeout(() => setAdd(false), 2000);
+
+
+  }
   const { addToCart } = useContext(CartContext);
   return (
     <div className="container-card">
       <div className="container-card-img">
         <img src={ele?.thumbnail} alt="product" className="product-image" />
         <Process productId={ele?.id} />
-        <button className="add-to-cart-btn" onClick={() => addToCart(ele)}>Add to Cart</button>
+        <button className="add-to-cart-btn" onClick={() => { addToCart(ele); handleAdd(); }} >
+          {added ? "Added to cart!" : "Add to Cart"}
+        </button>
       </div>
 
       <div className="container-card-details">

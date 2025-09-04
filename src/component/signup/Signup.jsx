@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./signup.css";
 import signup_img from "./../../assets/images/register.jpg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Register from "./../../Apis/Register";
 
 export default function Signup() {
@@ -10,6 +10,8 @@ export default function Signup() {
   const addressRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const location = useLocation();
+
 
   const [errors, setErrors] = useState({});
 
@@ -48,7 +50,6 @@ export default function Signup() {
       if (response) {
         console.log("API Response:", response);
         alert("Registered successfully!");
-        // Clear inputs manually
         nameRef.current.value = "";
         genderRef.current.value = "";
         addressRef.current.value = "";
@@ -61,55 +62,65 @@ export default function Signup() {
   };
 
   return (
-    <div className="register-container">
-      <div className="img-box">
-        <img src={signup_img} alt="register" />
+    <>
+      <div className="pageHeading p-5 d-flex">
+        <Link to="/" className="nav-link">
+          Home
+        </Link>
+        /<span className="active">{location.pathname.slice(1)}</span>
       </div>
+      <div className="register-container">
 
-      <div className="form-box">
-        <div className="form-card">
-          <h2>Create an account</h2>
-          <p>Enter your details below</p>
-          <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Full Name" ref={nameRef} />
-            {errors.name && <p className="error">{errors.name}</p>}
+        <div className="img-box">
 
-            <select ref={genderRef}>
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-            {errors.gender && <p className="error">{errors.gender}</p>}
+          <img src={signup_img} alt="register" />
+        </div>
 
-            <input type="text" placeholder="Address" ref={addressRef} />
-            {errors.address && <p className="error">{errors.address}</p>}
+        <div className="form-box">
+          <div className="form-card">
+            <h2>Create an account</h2>
+            <p>Enter your details below</p>
+            <form onSubmit={handleSubmit}>
+              <input type="text" placeholder="Full Name" ref={nameRef} />
+              {errors.name && <p className="error">{errors.name}</p>}
 
-            <input
-              type="email"
-              placeholder="Email or Phone Number"
-              ref={emailRef}
-            />
-            {errors.email && <p className="error">{errors.email}</p>}
+              <select ref={genderRef}>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              {errors.gender && <p className="error">{errors.gender}</p>}
 
-            <input type="password" placeholder="Password" ref={passwordRef} />
-            {errors.password && <p className="error">{errors.password}</p>}
+              <input type="text" placeholder="Address" ref={addressRef} />
+              {errors.address && <p className="error">{errors.address}</p>}
 
-            <button type="submit" className="createAccount">
-              Create Account
-            </button>
-            <button type="button" className="google_register">
-              Sign up with Google
-            </button>
+              <input
+                type="email"
+                placeholder="Email or Phone Number"
+                ref={emailRef}
+              />
+              {errors.email && <p className="error">{errors.email}</p>}
 
-            <p className="login-text">
-              Already have an account?{" "}
-              <Link to="/login" className="login-link">
-                Login
-              </Link>
-            </p>
-          </form>
+              <input type="password" placeholder="Password" ref={passwordRef} />
+              {errors.password && <p className="error">{errors.password}</p>}
+
+              <button type="submit" className="createAccount">
+                Create Account
+              </button>
+              <button type="button" className="google_register">
+                Sign up with Google
+              </button>
+
+              <p className="login-text">
+                Already have an account?{" "}
+                <Link to="/login" className="login-link">
+                  Login
+                </Link>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

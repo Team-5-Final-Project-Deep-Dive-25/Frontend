@@ -1,6 +1,7 @@
 import React from "react";
 import "./about.css";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { useLoaderData, Link, useLocation } from "react-router-dom";
 
 const team = [
   {
@@ -53,79 +54,88 @@ const team = [
     linkedin: "https://linkedin.com/in/laila"
   }
 ];
-
 const About = () => {
+  const location = useLocation();
+
   return (
-    <div className="about">
+    <>
+      <div className="pageHeading p-5 d-flex">
+        <Link to="/" className="nav-link">
+          Home
+        </Link>
+        /<span className="active">{location.pathname.slice(1)}</span>
+      </div>
+      <div className="about">
 
-  <section className="our-story">
-        <div className="story-text">
-          <h2>Our Story</h2>
-          <p>
-            Launched in 2015, Exclusive is South Asia’s premier online shopping
-            marketplace with an active presence in Bangladesh. Supported by a wide
-            range of tailored marketing, data and service solutions, Exclusive has
-            10,500 sellers and 300 brands and serves 3 million customers across
-            the region.
-          </p>
-          <p>
-            Exclusive has more than 1 Million products to offer, growing at a very
-            fast pace. Exclusive offers a diverse assortment in categories ranging
-            from consumer goods to lifestyle products.
-          </p>
-        </div>
-        <div className="story-image">
-          <img src="/public/Shopping bag concept illustration _ Free Vector.jpg" alt="Our Story" />
-        </div>
-      </section>
-
-
-      <h2>Meet Our Team </h2>
-      <div className="team-container">
-        {team.map((member, index) => (
-          <div className="team-card" key={index}>
-            <img src={member.img} alt={member.name} />
-            <h3>{member.name}</h3>
-            <p>{member.track}</p>
-            <div className="social-links">
-              <a href={member.github} target="_blank" rel="noreferrer" className="icon">
-                <FaGithub />
-              </a>
-              <a href={member.linkedin} target="_blank" rel="noreferrer" className="icon">
-                <FaLinkedin />
-              </a>
-            </div>
+        <section className="our-story">
+          <div className="story-text">
+            <h2>Our Story</h2>
+            <p>
+              Launched in 2015, Exclusive is South Asia’s premier online shopping
+              marketplace with an active presence in Bangladesh. Supported by a wide
+              range of tailored marketing, data and service solutions, Exclusive has
+              10,500 sellers and 300 brands and serves 3 million customers across
+              the region.
+            </p>
+            <p>
+              Exclusive has more than 1 Million products to offer, growing at a very
+              fast pace. Exclusive offers a diverse assortment in categories ranging
+              from consumer goods to lifestyle products.
+            </p>
           </div>
-        ))}
-      </div>
+          <div className="story-image">
+            <img src="/public/Shopping bag concept illustration _ Free Vector.jpg" alt="Our Story" />
+          </div>
+        </section>
 
-<section className="features">
-      <div className="feature-card">
-        <div className="icon">
-          <i className="bi bi-truck"></i>
+
+        <h2>Meet Our Team </h2>
+        <div className="team-container">
+          {team.map((member, index) => (
+            <div className="team-card" key={index}>
+              <img src={member.img} alt={member.name} />
+              <h3>{member.name}</h3>
+              <p>{member.track}</p>
+              <div className="social-links">
+                <a href={member.github} target="_blank" rel="noreferrer" className="icon">
+                  <FaGithub />
+                </a>
+                <a href={member.linkedin} target="_blank" rel="noreferrer" className="icon">
+                  <FaLinkedin />
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
-        <h3>FREE AND FAST DELIVERY</h3>
-        <p>Free delivery for all orders over $140</p>
-      </div>
 
-      <div className="feature-card">
-        <div className="icon">
-          <i className="bi bi-headset"></i>
-        </div>
-        <h3>24/7 CUSTOMER SERVICE</h3>
-        <p>Friendly 24/7 customer support</p>
-      </div>
+        <section className="features">
+          <div className="feature-card">
+            <div className="icon">
+              <i className="bi bi-truck"></i>
+            </div>
+            <h3>FREE AND FAST DELIVERY</h3>
+            <p>Free delivery for all orders over $140</p>
+          </div>
 
-      <div className="feature-card">
-        <div className="icon">
-          <i className="bi bi-shield-check"></i>
-        </div>
-        <h3>MONEY BACK GUARANTEE</h3>
-        <p>We return money within 30 days</p>
-      </div>
-    </section>
+          <div className="feature-card">
+            <div className="icon">
+              <i className="bi bi-headset"></i>
+            </div>
+            <h3>24/7 CUSTOMER SERVICE</h3>
+            <p>Friendly 24/7 customer support</p>
+          </div>
 
-    </div>
+          <div className="feature-card">
+            <div className="icon">
+              <i className="bi bi-shield-check"></i>
+            </div>
+            <h3>MONEY BACK GUARANTEE</h3>
+            <p>We return money within 30 days</p>
+          </div>
+        </section>
+
+      </div>
+    </>
   );
 };
 
