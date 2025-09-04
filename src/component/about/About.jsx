@@ -25,36 +25,36 @@ const team = [
     name: "Nehal Reda",
     track: "Frontend",
     img: "/public/avatarfemale.jpg",
-    github: "https://github.com/sara",
-    linkedin: "https://linkedin.com/in/sara"
+    github: "/",
+    linkedin: "/"
   },
   {
     name: "Menna Elgharabawi",
     track: "Backend",
     img: "/public/avatarfemale.jpg",
-    github: "https://github.com/omar",
-    linkedin: "https://linkedin.com/in/omar"
+    github: "/",
+    linkedin: "/"
   },
   {
     name: "Alaa",
     track: "Backend",
     img: "/public/avatarfemale.jpg",
-    github: "https://github.com/mona",
-    linkedin: "https://linkedin.com/in/mona"
+    github: "/",
+    linkedin: "/"
   },
   {
     name: "Khaled Mahmoud",
     track: "Backend",
     img: "/public/avatarmale.jpg",
-    github: "https://github.com/youssef",
-    linkedin: "https://linkedin.com/in/youssef"
+    github: "/",
+    linkedin: "/"
   },
   {
     name: "Ahmed Ewaida",
     track: "Flutter",
     img: "/public/avatarmale.jpg",
-    github: "https://github.com/laila",
-    linkedin: "https://linkedin.com/in/laila"
+    github: "/",
+    linkedin: "/"
   }
 ];
 

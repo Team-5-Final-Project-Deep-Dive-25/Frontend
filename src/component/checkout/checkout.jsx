@@ -54,38 +54,96 @@ export default function Checkout() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+
+
+
+
+const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) return;
 
-    console.log("Form submitted ✅:", formData);
-    alert("Order placed successfully!");
+    try {
+      const token = localStorage.getItem("token"); // لو فيه authentication
+      const response = await fetch("https://backend-gules-six-47.vercel.app/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // لو الباك إند محتاج توكن
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // 🟢 Reset all fields
-    setFormData({
-      firstName: "",
-      company: "",
-      street: "",
-      apartment: "",
-      city: "",
-      phone: "",
-      email: "",
-      payment: "",
-      coupon: ""
-    });
+      const data = await response.json();
 
-    setErrors({});
+      if (response.ok) {
+        alert("Order placed successfully ✅");
+        console.log("Server Response:", data);
+
+        // إعادة تعيين الفورم بعد النجاح
+        setFormData({
+          firstName: "",
+          company: "",
+          street: "",
+          apartment: "",
+          city: "",
+          phone: "",
+          email: "",
+          payment: "",
+          coupon: ""
+        });
+        setErrors({});
+      } else {
+        alert("Failed to place order ❌");
+        console.error("Error:", data);
+      }
+    } catch (error) {
+      console.error("Request failed:", error);
+      alert("Something went wrong while placing the order ❌");
+    }
   };
 
   const handleApplyCoupon = () => {
     if (formData.coupon.trim() !== "") {
       alert(`Coupon "${formData.coupon}" applied! 🎉`);
-
-      // 🟢 Reset coupon field only
       setFormData({ ...formData, coupon: "" });
     }
   };
+
+
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   if (!validateForm()) return;
+
+  //   console.log("Form submitted ✅:", formData);
+  //   alert("Order placed successfully!");
+
+  //   // Reset all fields
+  //   setFormData({
+  //     firstName: "",
+  //     company: "",
+  //     street: "",
+  //     apartment: "",
+  //     city: "",
+  //     phone: "",
+  //     email: "",
+  //     payment: "",
+  //     coupon: ""
+  //   });
+
+  //   setErrors({});
+  // };
+
+  // const handleApplyCoupon = () => {
+  //   if (formData.coupon.trim() !== "") {
+  //     alert(`Coupon "${formData.coupon}" applied! 🎉`);
+
+  //     // 🟢 Reset coupon field only
+  //     setFormData({ ...formData, coupon: "" });
+  //   }
+  // };
 
   return (
     <div className="checkout">

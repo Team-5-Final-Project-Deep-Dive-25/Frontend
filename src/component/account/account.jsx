@@ -6,20 +6,19 @@ const EditProfile = () => {
     firstName: "",
     lastName: "",
     email: "",
-    address: "",
-    currentPassword: "",
-    newPassword: "",
-    confirmNewPassword: ""
+    address: ""
   });
 
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    // setFormData((prev) => ({
+
+    //   [name]: value
+    // }));
+setFormData({...formData,[name]:value})
+
   };
 
   const validateForm = () => {
@@ -50,12 +49,12 @@ const EditProfile = () => {
     }
 
     // Current Password
-    if (!formData.currentPassword.trim()) {
+    if (!formData.currentPassword?.trim()) {
       newErrors.currentPassword = "Current password is required";
     }
 
     // New Password
-    if (formData.newPassword.trim() && formData.newPassword.length < 6) {
+    if (formData.newPassword?.trim() && formData.newPassword.length < 6) {
       newErrors.newPassword = "New password must be at least 6 characters";
     }
 
@@ -83,24 +82,41 @@ const EditProfile = () => {
     setErrors({});
   };
 
-  const handleSaveChanges = () => {
-    if (!validateForm()) return;
 
-    alert("Changes saved successfully!");
-    console.log("Form Data ✅", formData);
 
-    // Reset form after saving
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      address: "",
-      currentPassword: "",
-      newPassword: "",
-      confirmNewPassword: ""
+
+  const handleSaveChanges = async () => {
+  if (!validateForm()) return;
+
+  try {
+    const token = localStorage.getItem("token"); 
+    const response = await fetch("https://backend-gules-six-47.vercel.app/api/users/profile", {
+      method: "PUT", 
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
     });
-    setErrors({});
-  };
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Profile updated successfully ✅");
+      console.log("Server Response:", data);
+    } else {
+      alert("Failed to update profile ❌");
+      console.error("Error:", data);
+    }
+  } catch (error) {
+    console.error("Request failed:", error);
+    alert("Something went wrong while updating profile ❌");
+  }
+};
+
+
+
+
 
   return (
     <div className="account-container">
