@@ -17,6 +17,16 @@
     transform: translateY(-10px);
     margin: 0;
 }
+.category-list {
+    max-height: 500px;
+    width: 300px;
+    overflow-x: hidden;
+
+    overflow-y: auto;
+  
+    padding: 0;
+    margin: 0;
+}
 
 .Sidebar .container ul li {
     transition: 0.3s;
@@ -55,6 +65,12 @@
     }
 
     .Sidebar .container ul::after {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    .Sidebar {
         display: none;
     }
 }

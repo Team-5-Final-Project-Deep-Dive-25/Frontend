@@ -104,12 +104,12 @@ function Footer() {
       </div>
 
       <div
-        className="text-center py-3 mt-4"
-        style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
+        className="text-center py-2"
+        style={{ backgroundColor: "rgba(255,255,255,0.1)" ,height:"34px" }}
       >
         © 2025 Copyright:
         <a
-          href="https://yourcompany.com"
+          href="#"
           className="text-white ms-2 text-decoration-none fw-bold"
           target="_blank"
           rel="noopener noreferrer"

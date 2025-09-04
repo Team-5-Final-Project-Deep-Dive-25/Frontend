@@ -1,0 +1,120 @@
+/* userpanal.css */
+
+/* Container general */
+.userpanal.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Headings */
+.userpanal h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+.userpanal table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.userpanal table th,
+.userpanal table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #343a40;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Action buttons */
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.btn-warning:hover,
+.btn-danger:hover {
+    opacity: 0.85;
+    transition: 0.2s;
+}
+
+/* Pagination buttons */
+.d-flex button {
+    margin-right: 5px;
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    background-color: #f8f9fa;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.d-flex button.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.d-flex button:hover {
+    opacity: 0.85;
+    transition: 0.2s;
+}
+
+/* Loading state */
+p {
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+    table th,
+    table td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    .d-flex button {
+        padding: 4px 10px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    .d-flex {
+        flex-wrap: wrap;
+    }
+
+    .d-flex button {
+        margin-bottom: 5px;
+    }
+}

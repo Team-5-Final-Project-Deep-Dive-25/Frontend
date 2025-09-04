@@ -109,15 +109,16 @@
     object-fit: cover;
 }
 
-/* ========== Tablet (≤992px) ========== */
 @media (max-width: 992px) {
 
 
-    .Head {
-        height: 500px;
-        width: 90%;
-        padding: 10px 0 0 0;
-    }
+    
+            .Head .container {
+                width: 100%;
+                max-width: 100%;
+                padding: 0 10px;
+            }
+   
 
     .slide {
         flex-direction: column;
@@ -162,7 +163,6 @@
     }
 }
 
-/* ========== Mobile (≤576px) ========== */
 @media (max-width: 576px) {
     .Head {
         padding: 20px 0 0;

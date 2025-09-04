@@ -34,7 +34,7 @@ const EditProfile = () => {
 
   return (
     <div className="account-container">
-      {/* Sidebar Links */}
+   
       <aside className="sidebar">
         <h4 className="sidebar-title">Manage My Account</h4>
         <ul>
@@ -52,7 +52,7 @@ const EditProfile = () => {
         <h4 className="sidebar-title">My Wishlist</h4>
       </aside>
 
-      {/* Profile Form */}
+   
       <div className="edit-profile-container">
         <h3>Edit Your Profile</h3>
         <form>

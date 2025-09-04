@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./products.css";
-import Product from "../../common/product/product";
+import Product from "../../common/product/Product";
 import { useLocation, Link } from "react-router-dom";
 import { ProductsContext } from "../../context/ProductsContext";
 
@@ -10,8 +10,8 @@ const Products = () => {
 
   return (
     <div className="Products">
-      <div className="pageHeading p-5 d-flex">
-        <Link to="/" className="nav-link">
+      <div className="pageHeading py-5 d-flex w-25">
+        <Link to="/" className="nav-link w-25">
           Home
         </Link>
         /<span className="active">{location.pathname.slice(1)}</span>

@@ -26,8 +26,8 @@ export default function Signup() {
     return newErrors;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
 
     const userData = {
       name: nameRef.current.value,

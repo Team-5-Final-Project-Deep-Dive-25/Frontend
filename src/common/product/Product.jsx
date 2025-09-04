@@ -21,18 +21,17 @@ const Product = ({ ele }) => {
   return (
     <div className="container-card">
       <div className="container-card-img">
-        <img src={ele?.thumbnail} alt="product" className="product-image" />
-        <Process productId={ele?.id} />
-        <button className="add-to-cart-btn" onClick={() => { addToCart(ele); handleAdd(); }} >
-          {added ? "Added to cart!" : "Add to Cart"}
-        </button>
+
+        <img src={ele?.images?.[0]} alt="product" className="product-image" />
+        <Process productId={ele?.id || ele?._id} />
+        <button className="add-to-cart-btn">Add to Cart</button>
+
       </div>
 
       <div className="container-card-details">
         <h2 className="product-title">
-          {ele?.title ? ele.title.split(" ").slice(0, 3).join(" ") : ""}
+          {ele?.name ? ele.name.split(" ").slice(0, 3).join(" ") : ""}
         </h2>
-
 
         <div className="product-info-row">
           <p className="product-price m-0">
@@ -49,7 +48,7 @@ const Product = ({ ele }) => {
             <FaStarHalfAlt />
             <FaRegStar />
           </div>
-          <p className="product-stock m-0">(0) left</p>
+          <p className="product-stock m-0">({ele?.stock || 0}) left</p>
         </div>
       </div>
     </div>
