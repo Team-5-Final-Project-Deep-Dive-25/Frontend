@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   const handleGetCategory = (categoryId) => {
     getProductsOfCategory(categoryId);
-    navigate("/ProductsOfCat");
+    navigate("/ProductsOfCategory");
   };
 
   return (

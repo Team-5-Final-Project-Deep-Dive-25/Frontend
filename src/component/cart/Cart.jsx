@@ -16,11 +16,11 @@ function Cart() {
   if (cart.length === 0) {
     return (
       <>
-        <div className="pageHeading p-5 d-flex">
-          <Link to="/" className="nav-link">
+        <div className="pageHeading py-5 d-flex w-25">
+          <Link to="/" className="nav-link w-25">
             Home
           </Link>
-          /<span className="active">{location.pathname.slice(1)}</span>
+          /<span className="active ms-3">{location.pathname.slice(1)}</span>
         </div>
         <div className="cart-page">
           <h2>Shopping Cart</h2>

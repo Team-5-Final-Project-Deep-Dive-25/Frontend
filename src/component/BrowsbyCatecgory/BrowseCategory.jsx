@@ -9,7 +9,7 @@ const BrowseCategory = () => {
 
   const handleGetCategory = (categoryId) => {
     getProductsOfCategory(categoryId);
-    navigate("/ProductsOfCat");
+    navigate("/ProductsOfCategory");
   };
 
   return (
@@ -27,7 +27,7 @@ const BrowseCategory = () => {
             <div
               key={index}
               className="cat-btn"
-              onClick={() => handleGetCategory(val._id)} // تعديل هنا لاستخدام _id
+              onClick={() => handleGetCategory(val._id)} 
             >
               <p className="m-0 m-auto">{val.title}</p>
             </div>

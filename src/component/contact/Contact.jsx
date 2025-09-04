@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./contact.css";
 import CreateContact from "../../Apis/Contact";
+import { useLocation ,Link} from "react-router-dom";
+
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -62,77 +64,79 @@ export default function Contact() {
 
   return (
     <div className="contact-wrapper">
-     
-      <div className="breadcrumb">
-        <span>Home</span> <span className="divider">/</span>{" "}
-        <span className="active">Contact</span>
+      <div className="pageHeading py-5 d-flex w-25">
+        <Link to="/" className="nav-link w-25 m-0">
+          Home
+        </Link>
+        /   <span className="active ms-3">{location.pathname.slice(1)}</span>
       </div>
+
       <div className="contact-wrapper">
         {/* <div className="breadcrumb">
           <span>Home</span> <span className="divider">/</span> <span className="active">Contact</span>
         </div> */}
 
-      <div className="contact-container">
-   
-        <div className="left">
-          <div className="card">
-            <div className="icon-circle">
-              <i className="bi-telephone"></i>
-            </div>
-            <div className="card-content">
-              <h4>Call To Us</h4>
-              <p>We are available 24/7, 7 days a week.</p>
-              <p>Phone: +8801611112222</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <div className="icon-circle">
-              <i className="bi-envelope"></i>
-            </div>
-            <div className="card-content">
-              <h4>Write To Us</h4>
-              <p>Fill out our form and we will contact you within 24 hours.</p>
-              <p>Email: customer@exclusive.com</p>
-              <p>Support: support@exclusive.com</p>
-            </div>
-          </div>
-        </div>
-
-    
-        <div className="right">
-          <div className="form-card">
-            <form onSubmit={handleSubmit}>
-              <div className="field1">
-                <input
-                  type="text"
-                  placeholder="Your Name *"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email *"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Your Phone *"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
+        <div className="contact-container">
+          <div className="left">
+            <div className="card">
+              <div className="icon-circle">
+                <i className="bi-telephone"></i>
               </div>
-              {errors.name && <p className="error">{errors.name}</p>}
-              {errors.email && <p className="error">{errors.email}</p>}
-              {errors.phone && <p className="error">{errors.phone}</p>}
+              <div className="card-content">
+                <h4>Call To Us</h4>
+                <p>We are available 24/7, 7 days a week.</p>
+                <p>Phone: +8801611112222</p>
+              </div>
+            </div>
 
-              <textarea
-                placeholder="Your Message *"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              ></textarea>
-              {errors.message && <p className="error">{errors.message}</p>}
+            <div className="card">
+              <div className="icon-circle">
+                <i className="bi-envelope"></i>
+              </div>
+              <div className="card-content">
+                <h4>Write To Us</h4>
+                <p>
+                  Fill out our form and we will contact you within 24 hours.
+                </p>
+                <p>Email: customer@exclusive.com</p>
+                <p>Support: support@exclusive.com</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="right">
+            <div className="form-card">
+              <form onSubmit={handleSubmit}>
+                <div className="field1">
+                  <input
+                    type="text"
+                    placeholder="Your Name *"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email *"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Your Phone *"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+                {errors.name && <p className="error">{errors.name}</p>}
+                {errors.email && <p className="error">{errors.email}</p>}
+                {errors.phone && <p className="error">{errors.phone}</p>}
+
+                <textarea
+                  placeholder="Your Message *"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                ></textarea>
+                {errors.message && <p className="error">{errors.message}</p>}
 
                 <button type="submit" disabled={loading}>
                   {loading ? "Sending..." : "Send Message"}

@@ -1,0 +1,7 @@
+.tableproduct{
+        scroll-snap-type: x mandatory;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: gray transparent;
+}

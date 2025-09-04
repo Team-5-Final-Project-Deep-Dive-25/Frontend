@@ -56,13 +56,14 @@ export const deleteUser = async (token, id) => {
 
 // PRODUCTS
 
-export const getProducts = async (token, category) => {
-    const url = category ? `${API_BASE_URL}/products?category=${category}` : `${API_BASE_URL}/products`;
-    const response = await axios.get(url, {
-        headers: { Authorization: `Bearer ${token}` },
+export const getProducts = async (token, page = 1) => {
+    return await axios.get(`${API_BASE_URL}/products?page=${page}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
     });
-    return response.data;
 };
+
 
 export const addProduct = async (token, productData) => {
     const response = await axios.post(`${API_BASE_URL}/products`, productData, {

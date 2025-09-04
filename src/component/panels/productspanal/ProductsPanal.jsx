@@ -5,7 +5,14 @@ import {
   updateProduct,
   deleteProduct,
 } from "../../../Apis/api";
-import { Table, Button, Modal, Form, Spinner } from "react-bootstrap";
+import {
+  Table,
+  Button,
+  Modal,
+  Form,
+  Spinner,
+  Pagination,
+} from "react-bootstrap";
 
 const ProductsPanel = () => {
   const [products, setProducts] = useState([]);
@@ -24,13 +31,18 @@ const ProductsPanel = () => {
     images: [],
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   const token = localStorage.getItem("token");
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (page = 1) => {
     setLoading(true);
     try {
-      const res = await getProducts(token);
-      setProducts(res.data || []);
+      const res = await getProducts(token, page);
+      setProducts(res.data.data);
+      setTotalPages(res.data.pages);
+      setCurrentPage(page);
     } catch (error) {
       console.error(error);
       setProducts([]);
@@ -40,7 +52,7 @@ const ProductsPanel = () => {
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts(currentPage);
   }, []);
 
   const handleChange = (e) => {
@@ -81,7 +93,7 @@ const ProductsPanel = () => {
       });
       await addProduct(token, form);
       setShowAddModal(false);
-      fetchProducts();
+      fetchProducts(currentPage);
       resetForm();
     } catch (error) {
       console.error("Add product error:", error);
@@ -104,7 +116,7 @@ const ProductsPanel = () => {
       });
       await updateProduct(token, selectedProduct._id, form);
       setShowEditModal(false);
-      fetchProducts();
+      fetchProducts(currentPage);
       resetForm();
     } catch (error) {
       console.error("Edit product error:", error);
@@ -116,7 +128,12 @@ const ProductsPanel = () => {
       return;
     try {
       await deleteProduct(token, id);
-      fetchProducts();
+      // If current page is empty after delete, go back a page if possible
+      if (products.length === 1 && currentPage > 1) {
+        fetchProducts(currentPage - 1);
+      } else {
+        fetchProducts(currentPage);
+      }
     } catch (error) {
       console.error("Delete product error:", error);
     }
@@ -137,6 +154,70 @@ const ProductsPanel = () => {
     setShowEditModal(true);
   };
 
+
+  const renderPagination = () => {
+    let items = [];
+
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, currentPage + 2);
+
+    if (startPage > 1) {
+      items.push(
+        <Pagination.Item key={1} onClick={() => fetchProducts(1)}>
+          1
+        </Pagination.Item>
+      );
+      if (startPage > 2) {
+        items.push(<Pagination.Ellipsis key="start-ellipsis" disabled />);
+      }
+    }
+
+    for (let number = startPage; number <= endPage; number++) {
+      items.push(
+        <Pagination.Item
+          key={number}
+          active={number === currentPage}
+          onClick={() => fetchProducts(number)}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
+
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        items.push(<Pagination.Ellipsis key="end-ellipsis" disabled />);
+      }
+      items.push(
+        <Pagination.Item
+          key={totalPages}
+          onClick={() => fetchProducts(totalPages)}
+        >
+          {totalPages}
+        </Pagination.Item>
+      );
+    }
+
+    return (
+      <Pagination
+        className="justify-content-center mt-3"
+        style={{ userSelect: "none" }}
+      >
+        <Pagination.Prev
+          onClick={() => currentPage > 1 && fetchProducts(currentPage - 1)}
+          disabled={currentPage === 1}
+        />
+        {items}
+        <Pagination.Next
+          onClick={() =>
+            currentPage < totalPages && fetchProducts(currentPage + 1)
+          }
+          disabled={currentPage === totalPages}
+        />
+      </Pagination>
+    );
+  };
+
   return (
     <div className="container-fluid mt-4 px-3 px-md-5">
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 mb-3">
@@ -151,54 +232,57 @@ const ProductsPanel = () => {
           <Spinner animation="border" />
         </div>
       ) : (
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Rate</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.length > 0 ? (
-              products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product.name}</td>
-                  <td>{product.description}</td>
-                  <td>{product.price}</td>
-                  <td>{product.stock}</td>
-                  <td>{product.rate}</td>
-                  <td>
-                    <Button
-                      variant="warning"
-                      size="sm"
-                      className="me-2"
-                      onClick={() => openEditModal(product)}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={() => handleDeleteProduct(product._id)}
-                    >
-                      Delete
-                    </Button>
+        <>
+          <Table striped bordered hover responsive className="tableproduct">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Rate</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.length > 0 ? (
+                products.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product.name}</td>
+                    <td>{product.description}</td>
+                    <td>{product.price}</td>
+                    <td>{product.stock}</td>
+                    <td>{product.rate}</td>
+                    <td>
+                      <Button
+                        variant="warning"
+                        size="sm"
+                        className="me-2"
+                        onClick={() => openEditModal(product)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => handleDeleteProduct(product._id)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="text-center">
+                    No products found
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="text-center">
-                  No products found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
+              )}
+            </tbody>
+          </Table>
+          {renderPagination()}
+        </>
       )}
 
       {/* Add Modal */}

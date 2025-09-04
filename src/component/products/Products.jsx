@@ -16,6 +16,8 @@ const Products = () => {
         </Link>
         /<span className="active">{location.pathname.slice(1)}</span>
       </div>
+
+      
       <div className="container">
         <div className="sort-products">
           <span>Sort by : </span>

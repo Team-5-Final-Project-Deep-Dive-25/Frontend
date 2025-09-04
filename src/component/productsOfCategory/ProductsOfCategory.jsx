@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./productsOfCat.css";
 import { useLocation } from "react-router-dom";
-import Product from "../../common/product/product";
+import Product from "../../common/product/Product";
 import { ProductsContext } from "../../context/ProductsContext";
 import { Link } from "react-router-dom";
 
-const ProductsOfCat = () => {
+const ProductsOfCategory = () => {
   const location = useLocation();
- const [productsData, setProductsData] = useState([]);
+  const [productsData, setProductsData] = useState([]);
   const { productsOfCategory } = useContext(ProductsContext);
 
   useEffect(() => {
@@ -34,4 +34,4 @@ const ProductsOfCat = () => {
   );
 };
 
-export default ProductsOfCat;
+export default ProductsOfCategory;

@@ -78,6 +78,8 @@ del {
     margin: 0;
 }
 
+a
+
 @media (max-width: 992px) {
     .section-heading {
         align-items: center;

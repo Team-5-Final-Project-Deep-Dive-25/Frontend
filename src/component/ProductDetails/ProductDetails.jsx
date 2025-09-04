@@ -7,7 +7,7 @@ import { CartContext } from "../../context/CartContext";
 
 
 import { FaRegHeart, FaShippingFast, FaShieldAlt } from "react-icons/fa";
-import { getProductById } from "../../Apis/products"; // استخدمنا الـ API اللي جهزته
+import { getProductById } from "../../Apis/products"; 
 
 import "./ProductDetails.css";
 

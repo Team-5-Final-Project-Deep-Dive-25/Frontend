@@ -59,35 +59,36 @@ const About = () => {
 
   return (
     <>
-      <div className="pageHeading p-5 d-flex">
-        <Link to="/" className="nav-link">
+      <div className="pageHeading py-5 d-flex w-25 ms-2">
+        <Link to="/" className="nav-link w-25">
           Home
         </Link>
-        /<span className="active">{location.pathname.slice(1)}</span>
+        /<span className="active ms-3">{location.pathname.slice(1)}</span>
       </div>
       <div className="about">
-
         <section className="our-story">
           <div className="story-text">
             <h2>Our Story</h2>
             <p>
-              Launched in 2015, Exclusive is South Asia’s premier online shopping
-              marketplace with an active presence in Bangladesh. Supported by a wide
-              range of tailored marketing, data and service solutions, Exclusive has
-              10,500 sellers and 300 brands and serves 3 million customers across
-              the region.
+              Launched in 2015, Exclusive is South Asia’s premier online
+              shopping marketplace with an active presence in Bangladesh.
+              Supported by a wide range of tailored marketing, data and service
+              solutions, Exclusive has 10,500 sellers and 300 brands and serves
+              3 million customers across the region.
             </p>
             <p>
-              Exclusive has more than 1 Million products to offer, growing at a very
-              fast pace. Exclusive offers a diverse assortment in categories ranging
-              from consumer goods to lifestyle products.
+              Exclusive has more than 1 Million products to offer, growing at a
+              very fast pace. Exclusive offers a diverse assortment in
+              categories ranging from consumer goods to lifestyle products.
             </p>
           </div>
           <div className="story-image">
-            <img src="/public/Shopping bag concept illustration _ Free Vector.jpg" alt="Our Story" />
+            <img
+              src="/public/Shopping bag concept illustration _ Free Vector.jpg"
+              alt="Our Story"
+            />
           </div>
         </section>
-
 
         <h2>Meet Our Team </h2>
         <div className="team-container">
@@ -97,10 +98,20 @@ const About = () => {
               <h3>{member.name}</h3>
               <p>{member.track}</p>
               <div className="social-links">
-                <a href={member.github} target="_blank" rel="noreferrer" className="icon">
+                <a
+                  href={member.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="icon"
+                >
                   <FaGithub />
                 </a>
-                <a href={member.linkedin} target="_blank" rel="noreferrer" className="icon">
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="icon"
+                >
                   <FaLinkedin />
                 </a>
               </div>
@@ -133,7 +144,6 @@ const About = () => {
             <p>We return money within 30 days</p>
           </div>
         </section>
-
       </div>
     </>
   );

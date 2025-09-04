@@ -7,7 +7,7 @@ import Contact from "./component/contact/Contact";
 import SignUp from "./component/signup/Signup";
 import Wishlist from "./component/wishlist/Wishlist";
 import Login from "./component/login/login";
-import ProductsOfCat from './component/productsOfCategory/ProductsOfCat'
+import ProductsOfCategory from "./component/productsOfCategory/ProductsOfCategory";
 import NotFound from "./component/error404/notfound";
 import Checkout from "./component/checkout/checkout";
 import Account from './component/account/account'; 
@@ -66,13 +66,8 @@ const App = () => {
           element: <Products />,
         },
         {
-          path: "flash-sales",
-          element: <FlashSales />,
-        },
-
-        {
-          path: "/ProductsOfCat",
-          element: <ProductsOfCat />,
+          path: "/ProductsOfCategory",
+          element: <ProductsOfCategory />,
         },
         {
           path: "account",
@@ -83,15 +78,13 @@ const App = () => {
           element: <ProductDetails />,
         },
         {
-
           path: "/admin",
-          element: <AdminDashboard/>,
+          element: <AdminDashboard />,
         },
         {
           path: "*",
           element: <NotFound />,
         },
-
       ],
     },
   ]);
