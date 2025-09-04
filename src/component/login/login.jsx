@@ -6,7 +6,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let validationErrors = {};
 
@@ -23,18 +23,46 @@ const Login = () => {
     }
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log("Form submitted", { email, password });
-      alert("✅ Login successful ");
 
-      // تصفير الحقول بعد النجاح
+ try {
+        const response = await fetch("http://localhost:808/api/users/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("✅ Login successful");
+          console.log("Response from API:", data);
+
+          if (data.token) {
+            localStorage.setItem("token", data.token);
+          }
+
+
+      // console.log("Form submitted", { email, password });
+      // alert("✅ Login successful ");
+
       setEmail("");
       setPassword("");
       setErrors({});
+    } 
+    
+    else {
+          alert("❌ " + (data.message || "Login failed"));
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("⚠️ Server error, please try again later.");
+      }
     } else {
       setErrors(validationErrors);
     }
   };
-
   return (
     <div className="login">
       <div className="login-img">
