@@ -6,26 +6,24 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { CartContext } from "../../context/CartContext";
 
 const Product = ({ ele }) => {
-  const [added, setAdd] = useState(false)
-
+  const { addToCart } = useContext(CartContext);
+  const [added, setAdd] = useState(false);
 
   function handleAdd() {
-
-    addToCart(ele);
+    addToCart({ ...ele, quantity: 1 });
     setAdd(true);
     setTimeout(() => setAdd(false), 2000);
-
-
   }
-  const { addToCart } = useContext(CartContext);
+
   return (
     <div className="container-card">
       <div className="container-card-img">
-
         <img src={ele?.images?.[0]} alt="product" className="product-image" />
         <Process productId={ele?.id || ele?._id} />
-        <button className="add-to-cart-btn">Add to Cart</button>
 
+        <button className="add-to-cart-btn" onClick={handleAdd}>
+          {added ? "Added!" : "Add to Cart"}
+        </button>
       </div>
 
       <div className="container-card-details">
